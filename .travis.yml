@@ -1,15 +1,19 @@
 language: php
 services:
-- mysql
+  - mysql
 php:
-- 5.6
-- 7.0
+  - 5.6
+  - 7.0
+  - 7.1
+cache:
+  directories:
+    - $HOME/.composer/cache
 before_script:
-- cp .env.travis .env
-- mysql -e 'create database testing;'
-- composer self-update
-- composer install --no-interaction
-- php artisan key:generate
+  - cp .env.travis .env
+  - mysql -e 'create database testing;'
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan key:generate
 notifications:
   email: false
   slack:
@@ -20,3 +24,4 @@ notifications:
     on_success: always
     on_failure: never
     on_start: never
+script: vendor/bin/phpunit
