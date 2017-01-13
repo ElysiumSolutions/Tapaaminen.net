@@ -75,7 +75,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Tapaaminen.net
                 </div>
 
                 <div class="links">
