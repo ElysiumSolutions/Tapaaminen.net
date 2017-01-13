@@ -1,8 +1,3 @@
-<h3 class="title is-4">Tapaaminen.net?</h3>
-
-<h3 class="title is-4">Some</h3>
-
-<h3 class="title is-4">Ilmoitukset</h3>
 @for ($i = 0; $i < 4; $i++)
 	<div class="box">
 		<div class="media">
