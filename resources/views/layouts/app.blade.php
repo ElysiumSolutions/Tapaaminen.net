@@ -40,11 +40,19 @@
                                       
                     <div class="nav-right nav-menu">
                         @if (Auth::guest())
-                            <a href="#" class="nav-item">Luo tili</a>
-                            <a href="#" class="nav-item">Kirjaudu sisään</a>
+                            <a href="{{ url('/luo-tili') }}" class="nav-item">Luo tili</a>
+                            <a href="{{ url('/kirjaudu') }}" class="nav-item">Kirjaudu sisään</a>
                         @else
-                            <a href="#" class="nav-item">Oma tili</a>
-                            <a href="#" class="nav-item">Kirjaudu ulos</a>
+                            <a href="{{ url('/oma-tili') }}" class="nav-item">Oma tili</a>
+                            <a class="nav-item" href="{{ url('/ulos') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            Kirjaudu ulos
+                            </a>
+
+                            <form id="logout-form" action="{{ url('/ulos') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
                         @endif
                     </div>
                 </div>

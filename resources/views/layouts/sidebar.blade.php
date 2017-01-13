@@ -15,11 +15,6 @@
 					</p>
 				</div>
 			</div>
-			<div class="media-right">
-				<figure class="image is-64x64">
-					<img src="http://bulma.io/images/placeholders/128x128.png" alt="Image">
-				</figure>
-			</div>
 		</div>
 	</div>
 @endfor
