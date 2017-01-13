@@ -20,6 +20,8 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
+    protected $redirectTo = '/oma-tili';
+
     /**
      * Create a new controller instance.
      *

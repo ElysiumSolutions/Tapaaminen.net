@@ -1,76 +1,61 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+    <h3 class="title is-3">Salasanan nollaus</h3>
 
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
-                        {{ csrf_field() }}
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    @if (session('status'))
+        <div class="notification is-success">
+            {{ session('status') }}
         </div>
-    </div>
-</div>
+    @endif
+
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/salasana/nollaa') }}">
+        {{ csrf_field() }}
+
+        <input type="hidden" name="token" value="{{ $token }}">
+
+        <label class="label">Sähköposti</label>
+        <p class="control{{ $errors->has('email') ? ' has-icon has-icon-right' : '' }}">
+            <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" placeholder="Sähköposti" value="{{ old('email') }}" required autofocus>
+            @if ($errors->has('email'))
+                <span class="icon is-small">
+                    <i class="fa fa-warning"></i>
+                </span>
+                <span class="help is-danger">{{ $errors->first('email') }}</span>
+            @endif
+        </p>
+
+        <label class="label">Salasana</label>
+        <p class="control{{ $errors->has('password') ? ' has-icon has-icon-right' : '' }}">
+            <input id="password" type="password" class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password" required>
+            @if ($errors->has('password'))
+                <span class="icon is-small">
+                    <i class="fa fa-warning"></i>
+                </span>
+                <span class="help is-danger">{{ $errors->first('password') }}</span>
+            @endif
+        </p>
+
+        <label class="label">Vahvista salasana</label>
+        <p class="control{{ $errors->has('password_confirmation') ? ' has-icon has-icon-right' : '' }}">
+            <input id="password_confirmation" type="password" class="input{{ $errors->has('password_confirmation') ? ' is-danger' : '' }}" name="password_confirmation" required>
+            @if ($errors->has('password_confirmation'))
+                <span class="icon is-small">
+                    <i class="fa fa-warning"></i>
+                </span>
+                <span class="help is-danger">{{ $errors->first('password_confirmation') }}</span>
+            @endif
+        </p>
+
+
+        <div class="control is-grouped">
+            <p class="control">
+                <button class="button is-info">Nollaa salasana</button>
+            </p>
+            <p class="control">
+                <a class="button is-link" href="{{ url('/') }}">Peruuta</a>
+            </p>
+        </div>
+
+    </form>
 @endsection
