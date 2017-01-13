@@ -1,15 +1,18 @@
 language: php
-
 services:
-  - mysql
-
+- mysql
 php:
-  - 5.6
-  - 7.0
-
+- 5.6
+- 7.0
 before_script:
-  - cp .env.travis .env
-  - mysql -e 'create database testing;'
-  - composer self-update
-  - composer install --no-interaction
-  - php artisan key:generate
+- cp .env.travis .env
+- mysql -e 'create database testing;'
+- composer self-update
+- composer install --no-interaction
+- php artisan key:generate
+notifications:
+  slack:
+    secure: OF+alm2pZdtQJgoK4aQOgQ6cat7LRHzDcn5g9cD3nVGoINDCoocB8kCsJBaZK6sj8PLOLahuUBWfn614kJdJBfimdg6YAT9nWWad2qIu3YicqNPvGRBNeh9ynqA06RpoBTDdWqbMuNOmcfF4y9cx0AayULmnoUlq5uueDDIXWRBAA7BFHMFCf7ZJBzi0w75HKm5stssv8Th6SDdiAnRbhTRxihw/fHBZVdn6mIZjs0jiwkfXYxJZlnG0MXXeVc+I3Z+y/umHBdPK+T4o9wlVXqvHpICjmTJ3NypQQcYuc1NyjPG1E6YZujOKJ/4MIe61WTfmeFatRLuaMrQfKrFBzfOYTabjv2ZpvcgspJwKcZnjQ+9DDBBiG0lpgliV9y8uTmkQ6MVhQTqLd/Lb9ou9gx5TuQIaWpWt9//jSd4okVWpFPl2yJaY9B19DbxRF6LaRu/aPAVH/JXALCtk7cBiWV7mCnGdNwdy5HxPjEpF6goNDkeTOPt/BErLqSU3GgCaoR14WL5dv0lXNYNm3a9F7+tccLKsz8d5ngG0u19MkHW2ETtThqxLgABIOHkQp1xwUJnoPVHVK/NmMcCSPyRmzkYRT1vkFRuhNCiIHtsoRCh6tJBTvK7QYZarYhrLYSPX7vmGKH33XsHZPUu+hK8WfM66YJjD5I+WZdvGLDLFjZ0=
+  webhooks:
+    urls:
+      secure: IUsJWtWNi+/eMsRBo3mpOIWUY662O7dudls2U5LAlel2Qc1Wyi8DZwFkc7eAeLAPc7VnSPJYWV+NTX1SwYYADlhsmmtVmeOAdTQqLgn6W/BQUMm1BEYUPVppEhUu5OlPi60XkKwbaVf7KqadEs8IpfopizXtJ49R/YKcniAps0cG+M4AaK8WXdOVLG4bp6UV/nwBsXg0VIHr2aV1vQeBJuSDHc8AgaQl5jGOrSmXWpZ1Cfs1hsef8zcyoMGiG4S/TXI/rPYBuTrMYcCc63oX61jlOq92Zef5XgIwar6UKhsPFCn/N9b2Iu8it0fxqgSSFTHwaRW6J/ZhS8PgRaREEZnsQeKdIoX9pvZybJVD1MLN9HHwGVbkxvwOP5vcIX1vLp0zwoWNYPMW8vf3s7rsPr3/sqzqTEgllmVCpElKwWp/qL/7L9TVnsXrQ/mL0brzeepKryHuB014POem98CZi6D/INIJF+WoPl5jTerD7zNv0jYaA67N7hXagK4FOw1dw2W5t7eaWKa9H7yKkPWgeNOPtX2wpfCb3JlqA0RvimFBh0RS4GpqfQ4Lw79GWKlaZZ9eLKLKH3YzIoYgNjTJ7fDhZCFBMziQeFSpQMjjb7eJTDI5Y8HowSW8I4wDvwYdCUe56OJyuKnv74f1SQFRNd71jM84i29rU70MWZ5Sc4U=
