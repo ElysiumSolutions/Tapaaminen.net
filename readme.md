@@ -1,4 +1,4 @@
-# Tapaaminen.net
+# Tapaaminen.net [![Build Status](https://travis-ci.org/ElysiumSolutions/Tapaaminen.net.svg?branch=master)](https://travis-ci.org/ElysiumSolutions/Tapaaminen.net)
 
 TYÖN ALLA // WORK IN PROGRESS
 
