@@ -2,7 +2,7 @@
 
 @section('content')
     
-	<h3 class="title is-1">Työn alla</h3>
+	<h3 class="title is-3">Työn alla</h3>
 	<p>Tämä osa järjestelmää on vielä työnalla!</p>    
 
 @endsection
