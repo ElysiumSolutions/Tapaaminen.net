@@ -74,6 +74,12 @@
     </section>
     <section class="section">
         <div class="container">
+            @if(Auth::check() && Auth::User()->emailVerificationDate == null && Route::currentRouteName() != 'confirmEmail')
+                <div class="notification is-warning">
+                    <strong>Moi!</strong> Haluaisimme, että vahvistaisit sähköpostiosoitteesi. Näin ollen tiedämme, että sähköpostiosoitteesi on oikea ja voimme lähettää sinne esim. ohjeen unohtuneen salasanan nollaukseen ja muistutuksia. Tämä ilmoitus häviää automaattisesti kun sähköpostisosoitteesi on vahvistettu.<br /><br />
+                    <a class="button is-danger" href="{{ url('vahvista/sahkoposti') }}">Vahvista sähköpostiosoite</a>
+                </div>
+            @endif
             <div class="columns">
                 <div class="column is-two-thirds">
                     @yield('content')

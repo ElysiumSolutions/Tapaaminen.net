@@ -17,6 +17,10 @@ Route::get('/', function () {
 
 Route::get('/oma-tili', 'PagesController@wip')->middleware('auth');
 
+//Confirm email routes
+Route::get('/vahvista/sahkoposti', 'UserController@sendEmailConfirmation')->name('confirmEmail')->middleware('auth');
+Route::post('/vahvista/sahkoposti', 'UserController@confirmEmail')->middleware('auth');
+
 // Authentication Routes...
 Route::get('kirjaudu', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('kirjaudu', 'Auth\LoginController@login');
