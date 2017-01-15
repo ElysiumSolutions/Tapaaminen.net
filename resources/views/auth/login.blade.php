@@ -4,7 +4,7 @@
     
     <h3 class="title is-3">Kirjaudu sisään</h3>
 
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/kirjaudu') }}">
+    <form role="form" method="POST" action="{{ url('/kirjaudu') }}">
         {{ csrf_field() }}
         
         <label class="label">Sähköposti</label>
