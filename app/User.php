@@ -47,6 +47,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Get the meetings
+     */
+    public function meetings(){
+        return $this->hasMany('App\Meeting');
+    }
+
+    /**
+     * Custom password notification
+     */
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
