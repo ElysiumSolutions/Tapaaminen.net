@@ -24,10 +24,10 @@ Route::post('/vahvista/sahkoposti', 'UserController@confirmEmail')->middleware('
 // Authentication Routes...
 Route::get('kirjaudu', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('kirjaudu', 'Auth\LoginController@login');
-Route::post('ulos', 'Auth\LoginController@logout');
+Route::post('ulos', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
-Route::get('luo-tili', 'Auth\RegisterController@showRegistrationForm');
+Route::get('luo-tili', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('luo-tili', 'Auth\RegisterController@register');
 
 // Password Reset Routes...
