@@ -1,54 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
+    <form method="post" action="{{ url('/') }}">
+        {{ csrf_field() }}
+        <div class="is-hidden-tablet" style="margin-bottom:1em;">
+            @include('layouts.frontsidebar')
+        </div>
 
         <div class="columns">
             <div class="column is-half">
+                <h2 class="title is-3">Luo tapaaminen</h2>
+
+                <label class="label">Tapaamisen nimi <small>(esim. Lounas, Palaveri)</small></label>
+                <p class="control">
+                    <input class="input" name="name" type="text" placeholder="Anna tapaamisen nimi" required autofocus>
+                </p>
+
+                <label class="label">Tapaamisen kuvaus <small>(valinnainen)</small></label>
+                <p class="control">
+                    <textarea name="description" class="textarea" placeholder="Anna tapaamisen kuvaus"></textarea>
+                </p>
+
+                <label class="label">Sijainti <small>(valinnainen)</small></label>
+                <p class="control">
+                    <input class="input" name="location" type="text" placeholder="Anna tapaamisen sijainti">
+                </p>
+
+                <label class="label">Nimesi</label>
+                <p class="control">
+                    <input class="input" name="organizer" type="text" placeholder="Anna nimesi" required>
+                </p>
+
+                <label class="label">Sähköpostisi <small>(saat sähköpostiisi tapaamisen linkit)</small></label>
+                <p class="control">
+                    <input class="input" name="email" type="email" placeholder="Anna sähköpostisi" required>
+                </p>
 
             </div>
-            <div class="column is-half">
-                <article class="message is-success">
-                    <div class="message-body">
-                        <strong>Tervetuloa Tapaaminen.net sivustolle!</strong><br />
-                        Sivuston tarkoituksena on tarjota käyttäjälle mahdollisuus sopia tapaamisia ilmaiseksi ja helposti.<br />
-                        <br />
-                        Tapaamisen luonti ei vaadi rekisteröitymistä, mutta ilmainen käyttäjätili tuo lisää ominaisuuksia ja mahdollisuuden kysyä apua tai auttaa muita palstalla.<br />
-                        <br />
-                        Katsot juuri Tapaaminen.net sivuston uutta versiota ja siinä on käytännössä uudistettu kaikki. Mikäli haikailet vanhaan takaisin niin se löytyy osoitteesta <a href="https://vanha.tapaaminen.net">vanha.tapaaminen.net</a>.
-                    </div>
-                </article>
-                <article class="message is-success">
-                    <div class="message-body">
-                        <nav class="level">
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Tapaamisia</p>
-                                    <p class="title">{{ $meetingcount }}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Käyttäjiä</p>
-                                    <p class="title">{{ $usercount }}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Ilmottautumisia</p>
-                                    <p class="title">{{ $registrationcount }}</p>
-                                </div>
-                            </div>
-                            <div class="level-item has-text-centered">
-                                <div>
-                                    <p class="heading">Kommentteja</p>
-                                    <p class="title">{{ $commentcount }}</p>
-                                </div>
-                            </div>
-                        </nav>
-                    </div>
-                </article>
+            <div class="column is-half is-hidden-mobile">
+                @include('layouts.frontsidebar')
             </div>
         </div>
-
-
+    </form>
 @endsection

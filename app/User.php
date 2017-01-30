@@ -59,4 +59,12 @@ class User extends Authenticatable
     public function meetings(){
         return $this->hasMany('App\Meeting');
     }
+
+    public function registrations(){
+        return $this->hasMany('App\Registration');
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
 }

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PagesController@index');
+Route::post('/', 'MeetingController@store');
 
 // bbs routes
 Route::get('/palsta', 'ThreadController@index');
@@ -40,3 +41,11 @@ Route::get('salasana/nollaa', 'Auth\ForgotPasswordController@showLinkRequestForm
 Route::post('salasana/sahkoposti', 'Auth\ForgotPasswordController@sendResetLinkEmail');
 Route::get('salasana/nollaa/{token}', 'Auth\ResetPasswordController@showResetForm');
 Route::post('salasana/nollaa', 'Auth\ResetPasswordController@reset');
+
+//legacy routes
+Route::get('/nayta/{id}', function($id){
+    return redirect('https://vanha.tapaaminen.net/nayta/'.$id);
+});
+Route::get('/hallinta/{id}', function($id){
+    return redirect('https://vanha.tapaaminen.net/hallinta/'.$id);
+});
