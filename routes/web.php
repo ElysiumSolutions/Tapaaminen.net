@@ -28,6 +28,9 @@ Route::post('/palsta/{slug}', 'PostController@store')->middleware('auth');
 // user routes
 Route::get('/oma-tili', 'UserController@index')->middleware('auth');
 Route::get('/oma-tili/ilmoitukset', 'UserController@notifications')->middleware('auth');
+Route::get('/oma-tili/muokkaa', 'UserController@edit')->middleware('auth');
+Route::patch('/oma-tili/muokkaa', 'UserController@update')->middleware('auth');
+Route::put('/oma-tili/muokkaa', 'UserController@updatePassword')->middleware('auth');
 
 //Confirm email routes
 Route::get('/vahvista/sahkoposti', 'UserController@sendEmailConfirmation')->name('confirmEmail')->middleware('auth');

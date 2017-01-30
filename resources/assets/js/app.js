@@ -141,3 +141,7 @@ $(document).ready(function(){
         }
     });
 });
+
+$("#flash-message-button").click(function(){
+   $("#flash-message").hide();
+});

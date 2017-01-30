@@ -43,7 +43,7 @@
                     <div class="media-content">
                         <div class="content">
                             <h4 class="title is-4"><a href="{{ url('/palsta/'.$thread->slug) }}">{{ $thread->title }}</a></h4>
-                            <h5 class="subtitle is-6"><a href="#">{{ "@".$thread->user->username }}</a> &bull; {{ $thread->created_at->diffForHumans() }}</h5>
+                            <h5 class="subtitle is-6">{{ "@".$thread->user->username }} &bull; {{ $thread->created_at->diffForHumans() }}</h5>
                             <p>{{ \Illuminate\Support\Str::words(strip_tags($thread->posts[0]->message), 30) }}</p>
 
                             <small>

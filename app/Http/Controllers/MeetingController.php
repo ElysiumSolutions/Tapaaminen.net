@@ -11,6 +11,8 @@ use App\Meeting;
 use App\Time;
 use App\Setting;
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MeetingCreated;
 
 class MeetingController extends Controller
 {
@@ -106,6 +108,8 @@ class MeetingController extends Controller
                 $time->save();
             }
         }
+
+        Mail::to($email)->send(new MeetingCreated($meeting));
 
         return redirect('/a/'.$adminslug);
     }

@@ -7,81 +7,66 @@
         <a href="{{ url('/oma-tili/muokkaa') }}" class="button is-info is-pulled-right">Muokkaa omia tietoja</a>
     </h2>
 
-    <hr />
-
-    <nav class="level">
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Tapaamiset</p>
-                <p class="title">233</p>
-            </div>
-        </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Ilmottautumiset</p>
-                <p class="title">233</p>
-            </div>
-        </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Kommentit</p>
-                <p class="title">123</p>
-            </div>
-        </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Viestit</p>
-                <p class="title">222</p>
-            </div>
-        </div>
-        <div class="level-item has-text-centered">
-            <div>
-                <p class="heading">Tykkäykset</p>
-                <p class="title">789</p>
-            </div>
-        </div>
-    </nav>
-
-    <hr />
-
     <div class="columns">
         <div class="column is-one-third">
-            <div class="box">
-                <h3 class="title is-5">Omat tapaamiset</h3>
-                @for($i = 0; $i < 3; $i++)
-                    <article class="message is-success">
-                        <div class="message-body">
-                            Tapaamisen infot
-                        </div>
-                    </article>
-                @endfor
-            </div>
+            <nav class="panel">
+                <p class="panel-heading">
+                    Omat tapaamiset
+                </p>
+
+                @if(count($meetings) == 0)
+                    <div class="panel-block">Ei tapaamisia!</div>
+                @else
+                    @foreach($meetings as $meeting)
+                        <a class="panel-block" href="{{ url('/s/'.$meeting->slug) }}">
+                            <span class="panel-icon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            {{ $meeting->name }}
+                        </a>
+                    @endforeach
+                @endif
+            </nav>
         </div>
         <div class="column is-one-third">
-            <div class="box">
-                <h3 class="title is-5">Omat ilmottautumiset</h3>
+            <nav class="panel">
+                <p class="panel-heading">
+                    Omat ilmottautumiset
+                </p>
 
-                @for($i = 0; $i < 3; $i++)
-                    <article class="message is-dark">
-                        <div class="message-body">
-                            Tapaamisen infot
-                        </div>
-                    </article>
-                @endfor
-            </div>
+                @if(count($registrations) == 0)
+                    <div class="panel-block">Ei ilmottautumisia!</div>
+                @else
+                    @foreach($registrations as $registration)
+                        <a class="panel-block" href="#">
+                            <span class="panel-icon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            {{ dump($registration) }}
+                        </a>
+                    @endforeach
+                @endif
+            </nav>
         </div>
         <div class="column is-one-third">
-            <div class="box">
-                <h3 class="title is-5">Ilmoitukset</h3>
+            <nav class="panel">
+                <p class="panel-heading">
+                    Ilmoitukset
+                </p>
 
-                @for($i = 0; $i < 3; $i++)
-                    <article class="message is-danger">
-                        <div class="message-body">
-                            Lipsumia....
-                        </div>
-                    </article>
-                @endfor
-            </div>
+                @if(count($notifications) == 0)
+                    <div class="panel-block">Ei ilmoituksia!</div>
+                @else
+                    @foreach($notifications as $notification)
+                        <a class="panel-block" href="#">
+                            <span class="panel-icon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                            {{ dump($notification) }}
+                        </a>
+                    @endforeach
+                @endif
+            </nav>
         </div>
     </div>
 

@@ -10434,6 +10434,10 @@ $(document).ready(function () {
         }
     });
 });
+
+$("#flash-message-button").click(function () {
+    $("#flash-message").hide();
+});
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),

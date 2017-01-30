@@ -78,11 +78,15 @@
 
         <section class="section">
             <div class="container">
+                @include('layouts.flashmessage')
+
                 @if(Auth::check() && Auth::User()->emailVerificationDate == null && Route::currentRouteName() != 'confirmEmail')
-                    <!--<div class="notification is-warning">
-                        <strong>Moi!</strong> Haluaisimme, että vahvistaisit sähköpostiosoitteesi. Näin ollen tiedämme, että sähköpostiosoitteesi on oikea ja voimme lähettää sinne esim. ohjeen unohtuneen salasanan nollaukseen ja muistutuksia. Tämä ilmoitus häviää automaattisesti kun sähköpostisosoitteesi on vahvistettu.<br /><br />
-                        <a class="button is-danger" href="{{ url('vahvista/sahkoposti') }}">Vahvista sähköpostiosoite</a>
-                    </div>-->
+                    <div class="message is-warning">
+                        <div class="message-body">
+                            <strong>Moi!</strong> Haluaisimme, että vahvistaisit sähköpostiosoitteesi. Näin ollen tiedämme, että sähköpostiosoitteesi on oikea ja voimme lähettää sinne esim. ohjeen unohtuneen salasanan nollaukseen ja muistutuksia. Tämä ilmoitus häviää automaattisesti kun sähköpostisosoitteesi on vahvistettu.<br /><br />
+                            <a class="button is-danger" href="{{ url('vahvista/sahkoposti') }}">Vahvista sähköpostiosoite</a>
+                        </div>
+                    </div>
                 @endif
 
                 @yield('content')

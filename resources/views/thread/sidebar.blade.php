@@ -10,10 +10,24 @@
             </figure>
             <div class="media-content">
                 <strong>{{ Auth::User()->name }}</strong> {{ "@".Auth::User()->username }}<br />
-                Ketjuja: {{ Auth::User()->threads->count() }} kpl<br />
-                Viestejä: {{ Auth::User()->posts->count() }} kpl<br />
-                Tapaamisia: {{ Auth::User()->meetings->count() }} kpl
+
+                <a href="{{ url('/oma-tili') }}">Oma tili</a><br />
+                <a href="{{ url('/ulos') }}"
+                   onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                    Kirjaudu ulos
+                </a>
+
+                <form id="logout-form" action="{{ url('/ulos') }}" method="POST" style="display: none;">
+                    {{ csrf_field() }}
+                </form>
             </div>
         </article>
     </div>
 @endif
+
+<article class="message is-danger">
+    <div class="message-body">
+        Kaikki palstalle kirjoitetut viestit ovat julkisia.<br /><strong>Älä</strong> siis jaa henkilökohtaista tietoa tai esimerkiksi tapaamisen hallintalinkkiä täällä.
+    </div>
+</article>
