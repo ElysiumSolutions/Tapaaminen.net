@@ -6,6 +6,9 @@ Koodi on osittain huonoa ja sitä parannellaan ajan kanssa. Laravel on vielä op
 
 Kehitysehdotukset/ideat/kommentit/bugit ovat tervetulleita!
 
+![Tapaaminen.net](https://github.com/ElysiumSolutions/Tapaaminen.net/raw/master/screenshot.png)
+
+
 ## Linkit
 
 * Sivusto: [Tapaaminen.net](https://tapaaminen.net/)
