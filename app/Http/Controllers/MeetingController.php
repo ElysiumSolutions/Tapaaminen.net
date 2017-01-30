@@ -58,7 +58,7 @@ class MeetingController extends Controller
         $email = $request->input('email');
 
         $slugify = new Slugify();
-        $slugify->activateRuleset('finnish');
+        $slugify->activateRuleset('swedish');
 
         $slugrandom = 6;
         $slug = $slugify->slugify(str_random($slugrandom)."-".$name);

@@ -9,10 +9,14 @@ Tapaamisen linkkiä voit jakaa osallistujille vapaasti. Hallinnan linkki on tark
     Näytä tapaaminen
 @endcomponent
 
+**Tapaamisen linkki:**
 @component('mail::panel')
-    Tapaamisen linkki: {{ url('/s/'.$meeting->slug) }}
+{{ url('/s/'.$meeting->slug) }}
+@endcomponent
 
-    Hallinnan linkki: {{ url('/a/'.$meeting->adminslug) }}
+**Hallinnan linkki:**
+@component('mail::panel')
+{{ url('/a/'.$meeting->adminslug) }}
 @endcomponent
 
 Terveisin,<br>

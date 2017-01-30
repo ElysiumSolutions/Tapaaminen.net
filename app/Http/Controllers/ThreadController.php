@@ -61,7 +61,7 @@ class ThreadController extends Controller
         $message = Markdown::convertToHtml($message);
 
         $slugify = new Slugify();
-        $slugify->activateRuleset('finnish');
+        $slugify->activateRuleset('swedish');
         $slug = $slugify->slugify($title);
 
         $j = 1;
