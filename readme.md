@@ -8,6 +8,6 @@ Kehitysehdotukset/ideat/kommentit/bugit ovat tervetulleita!
 
 ## Linkit
 
-* Sivusto: [Tapaaminen.net](https://tapaaminen.net/
+* Sivusto: [Tapaaminen.net](https://tapaaminen.net/)
 * Tekijät: [Elysium Solutions Oy](https://elysium.fi/) / [Marko Kaartinen](https://markokaartinen.net)
 * Framework: [Laravel](http://laravel.com/)
