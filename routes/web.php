@@ -11,8 +11,11 @@
 |
 */
 
+// meeting routes
 Route::get('/', 'PagesController@index');
 Route::post('/', 'MeetingController@store');
+Route::get('/a/{adminslug}', 'MeetingController@admin');
+Route::get('/s/{slug}', 'MeetingController@show');
 
 // bbs routes
 Route::get('/palsta', 'ThreadController@index');
@@ -29,13 +32,16 @@ Route::get('/oma-tili/ilmoitukset', 'UserController@notifications')->middleware(
 //Confirm email routes
 Route::get('/vahvista/sahkoposti', 'UserController@sendEmailConfirmation')->name('confirmEmail')->middleware('auth');
 Route::post('/vahvista/sahkoposti', 'UserController@confirmEmail')->middleware('auth');
+
 // Authentication Routes...
 Route::get('kirjaudu', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('kirjaudu', 'Auth\LoginController@login');
 Route::post('ulos', 'Auth\LoginController@logout')->name('logout');
+
 // Registration Routes...
 Route::get('luo-tili', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('luo-tili', 'Auth\RegisterController@register');
+
 // Password Reset Routes...
 Route::get('salasana/nollaa', 'Auth\ForgotPasswordController@showLinkRequestForm');
 Route::post('salasana/sahkoposti', 'Auth\ForgotPasswordController@sendResetLinkEmail');

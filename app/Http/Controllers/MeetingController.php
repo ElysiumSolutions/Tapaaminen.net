@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use function GuzzleHttp\json_encode;
 use Illuminate\Http\Request;
+use Auth;
+use Cocur\Slugify\Slugify;
+use Illuminate\Support\Facades\DB;
+use App\Meeting;
+use App\Time;
+use App\Setting;
+use Ramsey\Uuid\Uuid;
 
 class MeetingController extends Controller
 {
@@ -14,18 +22,109 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'organizer' => 'required',
+            'email' => 'required|email',
+            'dates' => 'required'
+        ]);
+
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $location = $request->input('location');
+        $organizer = $request->input('organizer');
+        $email = $request->input('email');
+
+        $slugify = new Slugify();
+        $slugify->activateRuleset('finnish');
+
+        $slugrandom = 6;
+        $slug = $slugify->slugify(str_random($slugrandom)."-".$name);
+
+        $slugs = DB::table("meetings")->where([
+            ["slug", "=", $slug]
+        ])->get();
+        if(count($slugs) > 0) {
+            while (count($slugs) > 0) {
+                $slug = $slugify->slugify(str_random($slugrandom)."-".$name);
+                $slugs = DB::table("threads")->where([
+                    ["slug", "=", $slug]
+                ])->get();
+            }
+        }
+
+        $adminslug = Uuid::uuid1()->toString();
+        $adminslugs = DB::table("meetings")->where([
+            ["adminslug", "=", $adminslug]
+        ])->get();
+        if(count($adminslugs) > 0) {
+            while (count($adminslugs) > 0) {
+                $adminslug = Uuid::uuid1()->toString();
+                $adminslugs = DB::table("meetings")->where([
+                    ["adminslug", "=", $adminslug]
+                ])->get();
+            }
+        }
+
+        $meeting = new Meeting;
+        $meeting->name = $name;
+        $meeting->description = $description;
+        $meeting->location = $location;
+        $meeting->email = $email;
+        $meeting->organizer = $organizer;
+        if(Auth::Check()){
+            $meeting->user_id = Auth::User()->id;
+        }
+        $meeting->slug = $slug;
+        $meeting->adminslug = $adminslug;
+        $meeting->save();
+
+        $settings = new Setting;
+        $settings->meeting_id = $meeting->id;
+        $settings->save();
+
+        $dates = $request->input('dates');
+        $dateparts = explode('|', $dates);
+        $column_amount = $request->input('column-amount');
+        for($i = 0; $i < count($dateparts); $i++){
+            $date = $dateparts[$i];
+            if($date != ""){
+                $datetimes = array();
+                $k = 1;
+                for($j = 1; $j <= $column_amount; $j++){
+                    $timeval = $request->input('time_'.$j.'_'.$date);
+                    if($timeval != "") {
+                        $datetimes['time_' . $k] = $timeval;
+                        $k++;
+                    }
+                }
+                $datetimejson = json_encode($datetimes);
+                $time = new Time;
+                $time->meeting_id = $meeting->id;
+                $time->day = $date;
+                $time->times = $datetimejson;
+                $time->save();
+            }
+        }
+
+        return redirect('/a/'.$adminslug);
+    }
+
+    public function admin($adminslug){
+        $meeting = Meeting::where('adminslug', $adminslug)->with('user', 'times', 'settings', 'comments')->first();
+        return $meeting;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  uuid  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $meeting = Meeting::where('slug', $slug)->with('user', 'times', 'settings', 'comments')->first();
+        return $meeting;
     }
 
     /**

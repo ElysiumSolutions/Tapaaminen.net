@@ -1,6 +1,7 @@
 
 @import "node_modules/font-awesome/scss/font-awesome";
 @import "node_modules/bulma/bulma";
+@import "jquery-ui";
 
 .thread .subtitle {
     margin-bottom:1em;
@@ -13,4 +14,8 @@
 
 .post-meta {
     margin-bottom:0.5em;
+}
+
+#meeting-calendar {
+    margin-bottom:1em;
 }

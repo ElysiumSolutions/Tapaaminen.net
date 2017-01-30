@@ -22,7 +22,7 @@ class Meeting extends Model
     }
 
     public function times(){
-        return $this->hasOne('App\Time');
+        return $this->hasMany('App\Time');
     }
 
     public function registrations(){
