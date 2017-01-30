@@ -77,6 +77,11 @@
             </tbody>
         </table>
 
-        <button type="submit" class="button is-success">Luo tapaaminen</button>
+        @if(Auth::guest())
+            <label class="label">Ihmisyystarkastus</label>
+            <p class="control"><div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div><br /></p>
+        @endif
+
+        <p class="control"><button type="submit" class="button is-success">Luo tapaaminen</button></p>
     </form>
 @endsection

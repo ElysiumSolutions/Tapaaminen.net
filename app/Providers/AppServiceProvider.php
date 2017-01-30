@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use GuzzleHttp\Client;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,22 @@ class AppServiceProvider extends ServiceProvider
                 return false;
             }
             return true;
+        });
+
+        Validator::extend('grecaptcha', function($attribute, $value, $parameters)
+        {
+            $client = new Client;
+            $r = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+                'query' => [
+                    'secret' => env('RECAPTCHA_SECRET'),
+                    'response' => $value
+                ]]);
+            $payload = json_decode($r->getBody()->getContents());
+            if($payload->success){
+                return true;
+            }else {
+                return false;
+            }
         });
     }
 

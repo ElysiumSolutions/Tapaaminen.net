@@ -13,6 +13,7 @@ use App\Setting;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MeetingCreated;
+use Validator;
 
 class MeetingController extends Controller
 {
@@ -24,12 +25,31 @@ class MeetingController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'organizer' => 'required',
-            'email' => 'required|email',
-            'dates' => 'required'
-        ]);
+        if(Auth::check()){
+            $validationrules = [
+                'name' => 'required',
+                'organizer' => 'required',
+                'email' => 'required|email',
+                'dates' => 'required'
+            ];
+        }else{
+            $validationrules = [
+                'name' => 'required',
+                'organizer' => 'required',
+                'email' => 'required|email',
+                'dates' => 'required',
+                'g-recaptcha-response' => 'required|grecaptcha'
+            ];
+        }
+        $validator = Validator::make($request->all(), $validationrules,
+            [
+                'grecaptcha' => 'Virheellinen ihmisyystarkastus!',
+            ]);
+        if ($validator->fails()) {
+            return redirect('/')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $name = $request->input('name');
         $description = $request->input('description');
@@ -116,7 +136,7 @@ class MeetingController extends Controller
 
     public function admin($adminslug){
         $meeting = Meeting::where('adminslug', $adminslug)->with('user', 'times', 'settings', 'comments')->first();
-        return $meeting;
+        return view('meetings.admin', compact('meeting'));
     }
 
     /**
@@ -128,7 +148,7 @@ class MeetingController extends Controller
     public function show($slug)
     {
         $meeting = Meeting::where('slug', $slug)->with('user', 'times', 'settings', 'comments')->first();
-        return $meeting;
+        return view('meetings.show', compact('meeting'));
     }
 
     /**
