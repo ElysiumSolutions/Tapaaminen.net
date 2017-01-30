@@ -1,9 +1,16 @@
 
-// Fonts
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+@import "node_modules/font-awesome/scss/font-awesome";
+@import "node_modules/bulma/bulma";
 
-// Variables
-@import "variables";
+.thread .subtitle {
+    margin-bottom:1em;
+    margin-top:-1em;
+}
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+#palsta-tinymce {
+    height:300px;
+}
+
+.post-meta {
+    margin-bottom:0.5em;
+}
