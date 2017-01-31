@@ -16,6 +16,7 @@ Route::get('/', 'PagesController@index');
 Route::post('/', 'MeetingController@store');
 Route::get('/a/{adminslug}', 'MeetingController@admin');
 Route::get('/s/{slug}', 'MeetingController@show');
+Route::post('/s/{slug}', 'CommentController@store');
 
 // bbs routes
 Route::get('/palsta', 'ThreadController@index');

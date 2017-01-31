@@ -46,7 +46,9 @@ class PostLiked extends Notification
     {
         return [
             'post_id' => $this->post->id,
-            'liker_id' => $this->liker->id
+            'liker_id' => $this->liker->id,
+            'message' => $this->liker->name . ' tykkäsi viestistäsi!',
+            'link' => url('/palsta/'.$this->post->thread->slug).'#'.$this->post->id
         ];
     }
 }

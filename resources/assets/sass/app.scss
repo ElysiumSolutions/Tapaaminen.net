@@ -1,5 +1,7 @@
-
 @import "node_modules/font-awesome/scss/font-awesome";
+
+$primary: hsl(141, 71%, 48%);
+
 @import "node_modules/bulma/bulma";
 @import "jquery-ui";
 
@@ -18,4 +20,8 @@
 
 #meeting-calendar {
     margin-bottom:1em;
+}
+
+.bbs-post .content {
+    font-size:1.1rem;
 }

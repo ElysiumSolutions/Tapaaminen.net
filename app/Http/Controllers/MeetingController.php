@@ -147,7 +147,17 @@ class MeetingController extends Controller
      */
     public function show($slug)
     {
-        $meeting = Meeting::where('slug', $slug)->with('user', 'times', 'settings', 'comments')->first();
+        $meeting = Meeting::where('slug', $slug)
+            ->with([
+                'user',
+                'times' => function($query){
+                    $query->orderBy('day', 'asc');
+                },
+                'settings',
+                'comments' => function($query){
+                    $query->orderBy('created_at', 'asc');
+                }
+            ])->first();
         return view('meetings.show', compact('meeting'));
     }
 

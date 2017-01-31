@@ -10438,6 +10438,13 @@ $(document).ready(function () {
 $("#flash-message-button").click(function () {
     $("#flash-message").hide();
 });
+
+$(".button-reply").click(function () {
+    var url = $(this).val();
+    var user = $(this).attr('data-user');
+    var markdown = "[@" + user + "](" + url + "):\n";
+    $("#post-message").val(markdown).focus();
+});
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),

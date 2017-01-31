@@ -6,16 +6,23 @@
         <div class="column is-two-thirds">
             <h2 class="title is-3">{{ $thread->title }}</h2>
             @foreach($thread->posts as $post)
-                <div class="box">
+                <div class="box bbs-post" id="{{ $post->id }}">
                     <article class="media">
                         <figure class="media-left">
                             <p class="image is-64x64">
                                 <img src="https://www.gravatar.com/avatar/{{ md5( strtolower( trim( $post->user->email ) ) ) }}?d=wavatar&img=false&s=128">
+                                @if($post->user->role == 'admin')
+                                    <div style="border-radius:0;" class="button is-danger is-small is-fullwidth">Ylläpito</div>
+                                @endif
                             </p>
                         </figure>
                         <div class="media-content">
                             <div class="post-meta">
-                                <strong>{{ $post->user->name }}</strong> <small>{{ '@'.$post->user->username }} &bull; {{ $post->created_at->diffForHumans() }}</small>
+                                <strong>{{ $post->user->name }}</strong>
+                                <small>
+                                    {{ '@'.$post->user->username }}
+                                    <a class="is-pulled-right" style="color:#4a4a4a;" href="{{ url('/palsta/'.$thread->slug.'#'.$post->id) }}">{{ $post->created_at->diffForHumans() }}</a>
+                                </small>
                             </div>
                             <div class="content">
                                 {!! $post->message !!}
@@ -23,32 +30,33 @@
                             <nav class="level">
                                 <div class="level-left">
                                     <p class="control">
-                                        <!--<button class="button is-small is-info is-outlined">
-                                            <span class="icon is-small"><i class="fa fa-reply"></i></span>
-                                            <span>Vastaa</span>
-                                        </button>-->
                                         @if(Auth::check())
-                                            <button class="button is-small is-danger is-outlined @if($post->user_id != Auth::User()->id) likeButton @endif" value="{{ $post->id }}" id="post-{{  $post->id }}-button">
+                                            <button type="button" class="button is-small is-info is-outlined button-reply" value="{{ url('/palsta/'.$thread->slug.'#'.$post->id) }}" data-user="{{ $post->user->username }}">
+                                                <span class="icon is-small"><i class="fa fa-reply"></i></span>
+                                                <span>Vastaa</span>
+                                            </button>
+                                            <button type="button" class="button is-small is-danger is-outlined @if($post->user_id != Auth::User()->id) likeButton @endif" value="{{ $post->id }}" id="post-{{  $post->id }}-button">
                                                <span class="icon is-small"><i class="fa fa-heart"></i></span>
                                                <span id="post-{{  $post->id }}-likecount">{{ $post->likes }}</span>
                                             </button> <span style="display: none; color:#ff3860; font-size:12px;" id="post-{{  $post->id }}-feedback"></span>
                                         @else
-                                            <button class="button is-small is-danger is-outlined">
+                                            <button type="button" class="button is-small is-danger is-outlined">
                                                 <span class="icon is-small"><i class="fa fa-heart"></i></span>
                                                 <span>{{ $post->likes }}</span>
                                             </button>
                                         @endif
                                     </p>
                                 </div>
-                                <div class="level-right">
-                                    <p class="control">
-                                        <!--<button class="button is-small is-danger is-outlined">
-                                            <span class="icon is-small"><i class="fa fa-exclamation-triangle"></i></span>
-                                        </button>-->
-                                    </p>
-                                </div>
+                                @if(Auth::check())
+                                    <!--<div class="level-right">
+                                        <p class="control">
+                                            <button type="button" class="button is-small is-danger is-outlined button-spam" value="{{ $post->id }}" data-reporter="{{ Auth::User()->id }}">
+                                                <span class="icon is-small"><i class="fa fa-exclamation-triangle"></i></span>
+                                            </button>
+                                        </p>
+                                    </div>-->
+                                @endif
                             </nav>
-
                         </div>
                     </article>
                 </div>
@@ -71,7 +79,7 @@
                         </figure>
                         <div class="media-content">
                             <p class="control">
-                                <textarea class="textarea" name="message" placeholder="Kommentoi..."></textarea>
+                                <textarea id="post-message" class="textarea" name="message" placeholder="Kommentoi..."></textarea>
                             </p>
 
                             @include('layouts.errors')

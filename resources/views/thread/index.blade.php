@@ -38,6 +38,9 @@
                     <figure class="media-left">
                         <p class="image is-64x64">
                             <img src="https://www.gravatar.com/avatar/{{ md5( strtolower( trim( $thread->user->email ) ) ) }}?d=wavatar&img=false&s=128">
+                            @if($thread->user->role == 'admin')
+                                <div style="border-radius:0;" class="button is-danger is-small is-fullwidth">Ylläpito</div>
+                            @endif
                         </p>
                     </figure>
                     <div class="media-content">

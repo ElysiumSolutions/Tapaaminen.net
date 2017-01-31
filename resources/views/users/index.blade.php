@@ -58,12 +58,7 @@
                     <div class="panel-block">Ei ilmoituksia!</div>
                 @else
                     @foreach($notifications as $notification)
-                        <a class="panel-block" href="#">
-                            <span class="panel-icon">
-                                <i class="fa fa-calendar"></i>
-                            </span>
-                            {{ dump($notification) }}
-                        </a>
+                        @include('layouts.notifications.'.class_basename($notification->type))
                     @endforeach
                 @endif
             </nav>

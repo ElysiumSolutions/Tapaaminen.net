@@ -42,7 +42,7 @@ class PostController extends Controller
 
     public function like(Request $request){
         $postid = $request->input('post');
-        $post = Post::where('id', $postid)->with('user')->first();
+        $post = Post::where('id', $postid)->with('user', 'thread')->first();
         $currentlikes = $post->likes;
         $feedback = "";
         $sendNotification = false;

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
+use GrahamCampbell\Markdown\Facades\Markdown;
+use App\Meeting;
+use Validator;
+use Auth;
 
 class CommentController extends Controller
 {
@@ -33,9 +37,44 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $slug)
     {
-        //
+        $meeting = Meeting::where('slug', $slug)->first();
+        if(Auth::check()){
+            $validationrules = [
+                'username' => 'required',
+                'comment' => 'required',
+                'email' => 'required|email',
+            ];
+        }else{
+            $validationrules = [
+                'username' => 'required',
+                'comment' => 'required',
+                'email' => 'required|email',
+                'g-recaptcha-response' => 'required|grecaptcha'
+            ];
+        }
+        $validator = Validator::make($request->all(), $validationrules,
+            [
+                'grecaptcha' => 'Virheellinen ihmisyystarkastus!',
+            ]);
+        if ($validator->fails()) {
+            return redirect('/s/'.$slug)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $comment = new Comment;
+        $comment->meeting_id = $meeting->id;
+        if(Auth::Check()){
+            $comment->user_id = Auth::User()->id;
+        }
+        $comment->username = $request->input('username');
+        $comment->comment = Markdown::convertToHtml($request->input('comment'));
+        $comment->email = $request->input('email');
+        $comment->save();
+
+        return redirect('/s/'.$slug.'#'.$comment->id);
     }
 
     /**

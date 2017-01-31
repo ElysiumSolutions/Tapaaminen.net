@@ -20,8 +20,11 @@ class CreateCommentsTable extends Migration
             $table->uuid('meeting_id');
             $table->foreign('meeting_id')->references('id')->on('meetings');
 
-            $table->uuid('user_id');
-            $table->foreign('user_id')->references('id')->on('meetings');
+            $table->uuid('user_id')->nullable()->default(null);
+            $table->foreign('user_id')->references('id')->on('users');
+
+            $table->string('username');
+            $table->string('email');
 
             $table->longText('comment');
 

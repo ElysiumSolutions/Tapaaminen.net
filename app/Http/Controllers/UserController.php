@@ -13,9 +13,9 @@ use Carbon\Carbon;
 class UserController extends Controller
 {
     public function index(){
-        $meetings = Auth::User()->meetings()->with('comments', 'registrations')->get();
-        $notifications = Auth::user()->unreadNotifications()->get();
-        $registrations = Auth::User()->registrations()->with('meeting')->get();
+        $meetings = Auth::User()->meetings()->with('comments', 'registrations')->latest()->get();
+        $notifications = Auth::user()->unreadNotifications()->latest()->limit(10)->get();
+        $registrations = Auth::User()->registrations()->with('meeting')->latest()->get();
         return view('users.index', compact('meetings', 'notifications', 'registrations'));
     }
 
