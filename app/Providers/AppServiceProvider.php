@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\Logging\Log;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use GuzzleHttp\Client;
+use Psr\Log\LoggerInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,6 +54,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+    	if(env('env'))
+	    $this->app->alias('bugsnag.logger', Log::class);
+	    $this->app->alias('bugsnag.logger', LoggerInterface::class);
     }
 }

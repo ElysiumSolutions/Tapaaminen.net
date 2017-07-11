@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.6.4",
         "barryvdh/laravel-ide-helper": "^2.2",
+        "bugsnag/bugsnag-laravel": "^2.0",
         "cocur/slugify": "^2.3",
         "doctrine/dbal": "^2.5",
         "graham-campbell/markdown": "^7.1",
