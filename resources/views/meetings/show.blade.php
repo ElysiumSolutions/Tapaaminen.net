@@ -80,29 +80,36 @@
                         {{ csrf_field() }}
                         <div class="columns">
                             <div class="column is-half">
-                                <label class="label">Nimesi</label>
-                                <p class="control">
-                                    <input type="text" name="username" class="input" placeholder="Nimesi" value="{{ old('username', $defaultname) }}" required>
-                                </p>
-                                <label class="label">Sähköpostisi <small>(ei julkaista)</small></label>
-                                <p class="control">
-                                    <input type="email" name="email" class="input" placeholder="Sähköpostisi" value="{{ old('email', $defaultemail) }}" required>
-                                </p>
+                                <div class="field">
+                                    <label class="label">Nimesi</label>
+                                    <p class="control">
+                                        <input type="text" name="username" class="input" placeholder="Nimesi" value="{{ old('username', $defaultname) }}" required>
+                                    </p>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Sähköpostisi <small>(ei julkaista)</small></label>
+                                    <p class="control">
+                                        <input type="email" name="email" class="input" placeholder="Sähköpostisi" value="{{ old('email', $defaultemail) }}" required>
+                                    </p>
+                                </div>
                             </div>
                             <div class="column is-half">
                                 @if(Auth::guest())
-                                    <label class="label">Ihmisyystarkastus</label>
-                                    <p class="control"><div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div><br /></p>
+                                    <div class="field">
+                                        <label class="label">Ihmisyystarkastus</label>
+                                        <p class="control"><div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div><br /></p>
+                                    </div>
                                 @endif
                             </div>
                         </div>
 
-
-
-                        <label class="label">Kommenttisi</label>
-                        <p class="control">
-                            <textarea class="textarea" name="comment" placeholder="Kommentoi">{{ old('username') }}</textarea>
-                        </p>
+                        <div class="field">
+                            <label class="label">Kommenttisi</label>
+                            <p class="control">
+                                <textarea class="textarea" name="comment" placeholder="Kommentoi">{{ old('username') }}</textarea>
+                            </p>
+                        </div>
 
                         <nav class="level">
                             <div class="level-left">

@@ -78,9 +78,11 @@
                             </p>
                         </figure>
                         <div class="media-content">
-                            <p class="control">
-                                <textarea id="post-message" class="textarea" name="message" placeholder="Kommentoi..."></textarea>
-                            </p>
+                            <div class="field">
+                                <p class="control">
+                                    <textarea id="post-message" class="textarea" name="message" placeholder="Kommentoi..."></textarea>
+                                </p>
+                            </div>
 
                             @include('layouts.errors')
 

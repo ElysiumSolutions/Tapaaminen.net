@@ -15,19 +15,23 @@
                 <form role="form" method="POST" action="{{ url('/palsta') }}">
                     {{ csrf_field() }}
 
-                    <label class="label">Otsikko</label>
-                    <p class="control">
-                        <input class="input is-large" type="text" name="title" placeholder="Kirjoita kuvaava otsikko" autofocus>
-                    </p>
+                    <div class="field">
+                        <label class="label">Otsikko</label>
+                        <p class="control">
+                            <input class="input is-large" type="text" name="title" placeholder="Kirjoita kuvaava otsikko" autofocus>
+                        </p>
+                    </div>
 
-                    <label class="label">Teksti</label>
-                    <p class="control">
-                        <textarea id="palsta-tinymce" class="textarea" name="message" placeholder="Kirjoita tekstisi tähän"></textarea>
-                    </p>
+                    <div class="field">
+                        <label class="label">Teksti</label>
+                        <p class="control">
+                            <textarea id="palsta-tinymce" class="textarea" name="message" placeholder="Kirjoita tekstisi tähän"></textarea>
+                        </p>
+                    </div>
 
                     @include('layouts.errors')
 
-                    <div class="control is-grouped">
+                    <div class="field is-grouped">
                         <p class="control">
                             <button type="submit" class="button is-info">Aloita keskustelu</button>
                         </p>
