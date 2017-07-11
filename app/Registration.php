@@ -20,4 +20,8 @@ class Registration extends Model
     public function meeting(){
         return $this->belongsTo('App\Meeting');
     }
+
+    public function time(){
+        return $this->belongsTo('App\Time');
+    }
 }

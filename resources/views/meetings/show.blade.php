@@ -39,7 +39,7 @@
     <div class="box" id="registration">
         <h3 class="title is-4">Ilmottaudu</h3>
 
-        {{ dump($meeting->times) }}
+        {{ dump($times) }}
     </div>
 
     @if($meeting->settings->comments)
@@ -78,22 +78,32 @@
                 <div class="media-content">
                     <form role="form" method="POST" action="{{ url('/s/'.$meeting->slug) }}">
                         {{ csrf_field() }}
-                        <label class="label">Nimesi</label>
-                        <p class="control">
-                            <input type="text" name="username" class="input" placeholder="Nimesi" value="{{ old('username', $defaultname) }}">
-                        </p>
-                        <label class="label">Sähköpostisi <small>(ei julkaista)</small></label>
-                        <p class="control">
-                            <input type="email" name="email" class="input" placeholder="Sähköpostisi" value="{{ old('email', $defaultemail) }}">
-                        </p>
+                        <div class="columns">
+                            <div class="column is-half">
+                                <label class="label">Nimesi</label>
+                                <p class="control">
+                                    <input type="text" name="username" class="input" placeholder="Nimesi" value="{{ old('username', $defaultname) }}" required>
+                                </p>
+                                <label class="label">Sähköpostisi <small>(ei julkaista)</small></label>
+                                <p class="control">
+                                    <input type="email" name="email" class="input" placeholder="Sähköpostisi" value="{{ old('email', $defaultemail) }}" required>
+                                </p>
+                            </div>
+                            <div class="column is-half">
+                                @if(Auth::guest())
+                                    <label class="label">Ihmisyystarkastus</label>
+                                    <p class="control"><div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div><br /></p>
+                                @endif
+                            </div>
+                        </div>
+
+
+
                         <label class="label">Kommenttisi</label>
                         <p class="control">
                             <textarea class="textarea" name="comment" placeholder="Kommentoi">{{ old('username') }}</textarea>
                         </p>
-                        @if(Auth::guest())
-                            <label class="label">Ihmisyystarkastus</label>
-                            <p class="control"><div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div><br /></p>
-                        @endif
+
                         <nav class="level">
                             <div class="level-left">
                                 <div class="level-item">

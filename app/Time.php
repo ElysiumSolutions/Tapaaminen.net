@@ -10,6 +10,14 @@ class Time extends Model
 {
     use Uuids;
     use SoftDeletes;
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+        'day'
+    ];
+
     // We use uuids instead
     public $incrementing = false;
 

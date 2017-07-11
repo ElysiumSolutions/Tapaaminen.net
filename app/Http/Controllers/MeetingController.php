@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use function GuzzleHttp\json_decode;
 use function GuzzleHttp\json_encode;
 use Illuminate\Http\Request;
 use Auth;
@@ -14,6 +15,7 @@ use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MeetingCreated;
 use Validator;
+use App\Registration;
 
 class MeetingController extends Controller
 {
@@ -69,7 +71,7 @@ class MeetingController extends Controller
         if(count($slugs) > 0) {
             while (count($slugs) > 0) {
                 $slug = $slugify->slugify(str_random($slugrandom)."-".$name);
-                $slugs = DB::table("threads")->where([
+                $slugs = DB::table("meetings")->where([
                     ["slug", "=", $slug]
                 ])->get();
             }
@@ -150,15 +152,28 @@ class MeetingController extends Controller
         $meeting = Meeting::where('slug', $slug)
             ->with([
                 'user',
-                'times' => function($query){
-                    $query->orderBy('day', 'asc');
-                },
                 'settings',
                 'comments' => function($query){
                     $query->orderBy('created_at', 'asc');
                 }
             ])->first();
-        return view('meetings.show', compact('meeting'));
+
+        $registrations = Registration::where('meeting_id', $meeting->id)->oldest()->get();
+
+        $meetingtimes = Time::where('meeting_id', $meeting->id)->orderBy('day', 'asc')->get();
+        $times = array();
+        foreach ($meetingtimes as $day) {
+            $timedata = json_decode($day->times, true);
+            if(count($timedata) > 0){
+                $timedatakeys = array_keys($timedata);
+                for($i = 0; $i < count($timedatakeys); $i++){
+                    $times[$day->day->format('n.Y')][$day->day->format('j')][$timedatakeys[$i]] = $timedata[$timedatakeys[$i]];
+                }
+            }else{
+                $times[$day->day->format('n.Y')][$day->day->format('j')]['time_1'] = "Päivä";
+            }
+        }
+        return view('meetings.show', compact('meeting', 'times', 'registrations'));
     }
 
     /**

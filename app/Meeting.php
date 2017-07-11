@@ -10,6 +10,7 @@ class Meeting extends Model
 {
     use Uuids;
     use SoftDeletes;
+
     // We use uuids instead
     public $incrementing = false;
 
