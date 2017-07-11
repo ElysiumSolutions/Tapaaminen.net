@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Time;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Auth;
@@ -104,31 +105,35 @@ class MeetingController extends Controller
         $settings->meeting_id = $meeting->id;
         $settings->save();
 
-        /*
+
         $dates = $request->input('dates');
         $dateparts = explode('|', $dates);
         $column_amount = $request->input('column-amount');
         for($i = 0; $i < count($dateparts); $i++){
             $date = $dateparts[$i];
             if($date != ""){
-                $datetimes = array();
                 $k = 1;
+                $datehastimes = false;
                 for($j = 1; $j <= $column_amount; $j++){
                     $timeval = $request->input('time_'.$j.'_'.$date);
                     if($timeval != "") {
-                        $datetimes['time_' . $k] = $timeval;
+	                    $time = new Time;
+	                    $time->meeting_id = $meeting->id;
+	                    $time->day = $date;
+	                    $time->time = $timeval;
+	                    $time->save();
+	                    $datehastimes = true;
                         $k++;
                     }
                 }
-                $datetimejson = json_encode($datetimes);
-                $time = new Time;
-                $time->meeting_id = $meeting->id;
-                $time->day = $date;
-                $time->times = $datetimejson;
-                $time->save();
+	            if($k > 0 && !$datehastimes){
+		            $time = new Time;
+		            $time->meeting_id = $meeting->id;
+		            $time->day = $date;
+		            $time->save();
+	            }
             }
         }
-        */
 
         Mail::to($email)->send(new MeetingCreated($meeting));
 
@@ -161,6 +166,8 @@ class MeetingController extends Controller
     		return response()->view("errors.404", [], 404);
 	    }
 
+	    $times = Time::where('meeting_id', $meeting->id)->orderBy('day', 'asc')->get();
+
         /*
         $registrations = Registration::where('meeting_id', $meeting->id)->oldest()->get();
 
@@ -178,7 +185,7 @@ class MeetingController extends Controller
             }
         }
         */
-        return view('meetings.show', compact('meeting', 'times', 'registrations'));
+        return view('meetings.show', compact('meeting', 'times'));
     }
 
     /**

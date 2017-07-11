@@ -86,7 +86,7 @@
                     <div class="message is-warning">
                         <div class="message-body">
                             <strong>Moi!</strong> Haluaisimme, että vahvistaisit sähköpostiosoitteesi. Näin ollen tiedämme, että sähköpostiosoitteesi on oikea ja voimme lähettää sinne esim. ohjeen unohtuneen salasanan nollaukseen ja muistutuksia. Tämä ilmoitus häviää automaattisesti kun sähköpostisosoitteesi on vahvistettu.<br /><br />
-                            <a class="button is-danger" href="{{ url('vahvista/sahkoposti') }}">Vahvista sähköpostiosoite</a>
+                            <a class="button is-warning" href="{{ url('vahvista/sahkoposti') }}">Vahvista sähköpostiosoite</a>
                         </div>
                     </div>
                 @endif

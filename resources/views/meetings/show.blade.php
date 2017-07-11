@@ -39,7 +39,7 @@
     <div class="box" id="registration">
         <h3 class="title is-4">Ilmottaudu</h3>
 
-        {{ dump($times) }}
+        {{ dump($meeting->times) }}
     </div>
 
     @if($meeting->settings->comments)

@@ -22,15 +22,15 @@ class Meeting extends Model
         return $this->hasOne('App\Setting');
     }
 
-    public function times(){
-        return $this->hasMany('App\Time');
-    }
-
     public function registrations(){
         return $this->hasMany('App\Registration');
     }
 
     public function comments(){
         return $this->hasMany('App\Comment');
+    }
+
+    public function times(){
+    	return $this->hasMany('App\Time');
     }
 }
