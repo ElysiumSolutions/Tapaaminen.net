@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Meeting;
 use App\User;
-use App\Registration;
 use App\Comment;
 
 class PagesController extends Controller
@@ -15,7 +14,8 @@ class PagesController extends Controller
         $meetingcount = Meeting::all()->count();
         $usercount = User::all()->count();
         $commentcount = Comment::all()->count();
-        $registrationcount = Registration::all()->count();
+        //$registrationcount = Registration::all()->count();
+	    $registrationcount = 0;
         return view('home', compact('meetingcount', 'usercount', 'registrationcount', 'commentcount'));
     }
 

@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use function GuzzleHttp\json_decode;
-use function GuzzleHttp\json_encode;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Auth;
 use Cocur\Slugify\Slugify;
 use Illuminate\Support\Facades\DB;
 use App\Meeting;
-use App\Time;
 use App\Setting;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MeetingCreated;
 use Validator;
-use App\Registration;
 
 class MeetingController extends Controller
 {
@@ -107,6 +104,7 @@ class MeetingController extends Controller
         $settings->meeting_id = $meeting->id;
         $settings->save();
 
+        /*
         $dates = $request->input('dates');
         $dateparts = explode('|', $dates);
         $column_amount = $request->input('column-amount');
@@ -130,6 +128,7 @@ class MeetingController extends Controller
                 $time->save();
             }
         }
+        */
 
         Mail::to($email)->send(new MeetingCreated($meeting));
 
@@ -149,15 +148,20 @@ class MeetingController extends Controller
      */
     public function show($slug)
     {
-        $meeting = Meeting::where('slug', $slug)
-            ->with([
-                'user',
-                'settings',
-                'comments' => function($query){
-                    $query->orderBy('created_at', 'asc');
-                }
-            ])->first();
+    	try {
+		    $meeting = Meeting::where( 'slug', $slug )
+                      ->with( [
+	                      'user',
+	                      'settings',
+	                      'comments' => function ( $query ) {
+		                      $query->orderBy( 'created_at', 'asc' );
+	                      }
+                      ] )->firstOrFail();
+	    }catch(ModelNotFoundException $e){
+    		return response()->view("errors.404", [], 404);
+	    }
 
+        /*
         $registrations = Registration::where('meeting_id', $meeting->id)->oldest()->get();
 
         $meetingtimes = Time::where('meeting_id', $meeting->id)->orderBy('day', 'asc')->get();
@@ -173,6 +177,7 @@ class MeetingController extends Controller
                 $times[$day->day->format('n.Y')][$day->day->format('j')]['time_1'] = "Päivä";
             }
         }
+        */
         return view('meetings.show', compact('meeting', 'times', 'registrations'));
     }
 
