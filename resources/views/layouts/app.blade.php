@@ -42,7 +42,7 @@
                     </span>
 
                         <div class="nav-right nav-menu">
-                            <a href="{{ url('/palsta') }}" class="nav-item">Palsta</a>
+                            <!-- <a href="{{ url('/palsta') }}" class="nav-item">Palsta</a> -->
                             @if (Auth::guest())
                                 <a href="{{ url('/luo-tili') }}" class="nav-item">Luo tili</a>
                                 <a href="{{ url('/kirjaudu') }}" class="nav-item">Kirjaudu sisään</a>

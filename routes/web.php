@@ -19,12 +19,14 @@ Route::get('/s/{slug}', 'MeetingController@show');
 Route::post('/s/{slug}', 'CommentController@store');
 
 // bbs routes
+/* work in progress
 Route::get('/palsta', 'ThreadController@index');
 Route::post('/palsta', 'ThreadController@store')->middleware('auth');
 Route::post('/palsta/tykkaa', 'PostController@like')->middleware('auth');
 Route::get('/palsta/uusi', 'ThreadController@create');
 Route::get('/palsta/{slug}', 'ThreadController@show');
 Route::post('/palsta/{slug}', 'PostController@store')->middleware('auth');
+*/
 
 // user routes
 Route::get('/oma-tili', 'UserController@index')->middleware('auth');
