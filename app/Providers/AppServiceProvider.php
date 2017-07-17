@@ -54,8 +54,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-    	if(env('env'))
-	    $this->app->alias('bugsnag.logger', Log::class);
-	    $this->app->alias('bugsnag.logger', LoggerInterface::class);
+    	if(env('APP_ENV') != "local") {
+		    $this->app->alias( 'bugsnag.logger', Log::class );
+		    $this->app->alias( 'bugsnag.logger', LoggerInterface::class );
+	    }
     }
 }
