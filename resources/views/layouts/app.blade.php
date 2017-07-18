@@ -99,8 +99,8 @@
                     <div class="container">
                         <div class="nav-left">
                             <a class="nav-item" href="{{ url('/') }}"><span class="icon"><i class="fa fa-home"></i></span></a>
-                            <a class="nav-item" href="https://twitter.com/MarkoK"><span class="icon"><i class="fa fa-twitter"></i></span></a>
-                            <a class="nav-item" href="https://github.com/ElysiumSolutions/Tapaaminen.net"><span class="icon"><i class="fa fa-github"></i></span></a>
+                            <a class="nav-item" href="https://twitter.com/MarkoK" target="_blank"><span class="icon"><i class="fa fa-twitter"></i></span></a>
+                            <a class="nav-item" href="https://github.com/ElysiumSolutions/Tapaaminen.net" target="_blank"><span class="icon"><i class="fa fa-github"></i></span></a>
                         </div>
 
                         <span class="nav-toggle" id="nav-toggle">
