@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 class PagesController extends Controller
 {
     public function index(){
-	    $statsdata = Cache::remember('statsdata', 2, function () {
+	    $statsdata = Cache::remember('statsdata', 15, function () {
 		    return array(
 			    "meetingcount" => Meeting::all()->count(),
 			    "usercount" => User::all()->count(),
