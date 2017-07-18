@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Contracts\Logging\Log;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -21,9 +20,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-    	//fix until upgraded to mariadb 10.2
-	    Schema::defaultStringLength(191);
-
         Carbon::setLocale('fi');
 
         Validator::extend('checkHashed', function($attribute, $value, $parameters)
