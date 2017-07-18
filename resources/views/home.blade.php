@@ -49,20 +49,20 @@
                         <input class="input" name="email" type="email" value="{{ old('email', $defaultemail) }}" placeholder="Anna sähköpostisi" required>
                     </p>
                 </div>
+                <br />
+                <h3 class="title is-5">Tapaamisen ajankohdat</h3>
+
+                <div class="field">
+                    <label class="label">Valitse päivä</label>
+                    <div id="meeting-calendar"></div>
+                    <input type="hidden" name="dates" id="dates" value="{{ old('dates') }}">
+                    <input type="hidden" name="column-amount" id="column-amount" value="{{ old('column-amount', 12) }}">
+                </div>
 
             </div>
             <div class="column is-half is-hidden-mobile">
                 @include('layouts.frontsidebar')
             </div>
-        </div>
-
-        <h3 class="title is-5">Tapaamisen ajankohdat</h3>
-
-        <div class="field">
-            <label class="label">Valitse päivä</label>
-            <div id="meeting-calendar"></div>
-            <input type="hidden" name="dates" id="dates" value="{{ old('dates') }}">
-            <input type="hidden" name="column-amount" id="column-amount" value="{{ old('column-amount', 12) }}">
         </div>
 
         <div class="field">
