@@ -74,7 +74,13 @@ class CommentController extends Controller
         $comment->email = $request->input('email');
         $comment->save();
 
-        return redirect('/s/'.$slug.'#'.$comment->id);
+	    $request->session()->put( 'flashmessage', [
+		    'title'   => "Kommentointi onnistui!",
+		    'message' => "Kommentointi onnistui!",
+		    'status'  => 'is-success'
+	    ] );
+
+        return redirect('/s/'.$slug);
     }
 
     /**
@@ -111,14 +117,27 @@ class CommentController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Comment $comment)
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param Request $request
+	 * @param $adminslug
+	 *
+	 * @return \Illuminate\Http\Response
+	 * @internal param Comment $comment
+	 */
+    public function destroy(Request $request, $adminslug)
     {
-        //
+    	$comment = Comment::where('id', $request->input('comment'))->firstOrFail();
+
+    	$comment->delete();
+
+	    $request->session()->put( 'flashmessage', [
+		    'title'   => "Kommentin poisto onnistui!",
+		    'message' => "Kommentin poisto onnistui!",
+		    'status'  => 'is-success'
+	    ] );
+
+	    return redirect('/a/'.$adminslug);
     }
 }

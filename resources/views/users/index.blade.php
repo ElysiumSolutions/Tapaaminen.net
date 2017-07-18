@@ -8,10 +8,11 @@
     </h2>
 
     <div class="columns">
-        <div class="column is-one-third">
+        <div class="column">
             <nav class="panel">
                 <p class="panel-heading">
                     Omat tapaamiset
+                    <a href="{{ url('/oma-tili/lunasta') }}" class="button is-warning is-small pull-right">Lunasta</a>
                 </p>
 
                 @if(count($meetings) == 0)
@@ -28,7 +29,7 @@
                 @endif
             </nav>
         </div>
-        <div class="column is-one-third">
+        <div class="column">
             <nav class="panel">
                 <p class="panel-heading">
                     Omat ilmottautumiset
@@ -38,17 +39,18 @@
                     <div class="panel-block">Ei ilmottautumisia!</div>
                 @else
                     @foreach($registrations as $registration)
-                        <a class="panel-block" href="#">
+                        <a class="panel-block" href="/s/{{ $registration->meeting->slug }}">
                             <span class="panel-icon">
                                 <i class="fa fa-calendar"></i>
                             </span>
-                            {{ dump($registration) }}
+                            {{ $registration->meeting->name }}
                         </a>
                     @endforeach
                 @endif
             </nav>
         </div>
-        <div class="column is-one-third">
+        {{-- TODO
+        <div class="column">
             <nav class="panel">
                 <p class="panel-heading">
                     Ilmoitukset
@@ -63,6 +65,7 @@
                 @endif
             </nav>
         </div>
+        --}}
     </div>
 
 @endsection

@@ -152,3 +152,10 @@ $(".button-reply").click(function(){
    var markdown = "[@"+user+"]("+url+"):\n";
    $("#post-message").val(markdown).focus();
 });
+
+$(".timestable .registration .timecell").click(function(){
+    $(this).find("input").prop("checked", !$(this).find("input").prop("checked"));
+});
+$(".timestable .registration .timecell input").click(function(){
+    $(this).prop("checked", !$(this).prop("checked"));
+});

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Contracts\Logging\Log;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\ServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
@@ -28,6 +29,19 @@ class AppServiceProvider extends ServiceProvider
                 return false;
             }
             return true;
+        });
+
+        Validator::extend('checkIfAdminurlHasUserAndItExists', function($attribute, $value, $parameters){
+        	$adminslug = str_replace("/", "", explode('/a/', $value)[1]);
+	        try {
+		        $meeting = \App\Meeting::where('adminslug', $adminslug)->firstOrFail();
+	        }catch(ModelNotFoundException $e){
+		        return false;
+	        }
+        	if($meeting->user_id != null){
+        		return false;
+	        }
+        	return true;
         });
 
         Validator::extend('grecaptcha', function($attribute, $value, $parameters)

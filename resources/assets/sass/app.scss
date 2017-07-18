@@ -1,9 +1,10 @@
 @import "node_modules/font-awesome/scss/font-awesome";
 
-$primary: hsl(141, 71%, 48%);
+//$primary: hsl(141, 71%, 48%);
 
 @import "node_modules/bulma/bulma";
 @import "jquery-ui";
+@import "~hint.css";
 
 .thread .subtitle {
     margin-bottom:1em;
@@ -24,4 +25,145 @@ $primary: hsl(141, 71%, 48%);
 
 .bbs-post .content {
     font-size:1.1rem;
+}
+
+.timestable {
+    width: auto;
+    max-width: 100%;
+}
+
+.timestable td {
+    vertical-align: middle;
+}
+
+.timestable .month {
+    border-left:0;
+    border-bottom:0;
+    text-align: center;
+    color:#000;
+    font-size: 14px;
+    background: #c4e3f3;
+    padding:5px;
+    line-height:14px;
+}
+
+.timestable .month ~ .month,
+.timestable .day ~ .day,
+.timestable .time ~ .time {
+    border-left:1px solid #000;
+}
+
+.timestable .day {
+    border-left:0;
+    border-bottom:0;
+    color:#000;
+    font-size: 14px;
+    background: #c4e3f3;
+    padding:5px;
+    line-height:14px;
+}
+
+.timestable .time {
+    border-left:0;
+    border-bottom:0;
+    text-align: center;
+    color:#000;
+    font-size: 14px;
+    background: #faf2cc;
+    padding:5px;
+    line-height:14px;
+}
+
+.timestable .empty {
+    border:0;
+    color:#000;
+    font-size: 14px;
+    padding:5px;
+    line-height:14px;
+}
+
+.timestable tfoot td {
+    color:#000;
+    border-top:2px solid #FFF;
+    border-left:2px solid #FFF;
+    font-size: 14px;
+    padding:5px 7px;
+    line-height:14px;
+}
+
+.timestable .registration td {
+    background: #D5E8F2;
+}
+
+.timestable .registration .timecell {
+    cursor:pointer;
+}
+
+.timestable .registration td:hover {
+    background:#c4e3f3;
+}
+
+.timestable tfoot td:first-child {
+    border-left:0;
+}
+
+.timestable tfoot p {
+    text-align: center;
+}
+
+.timestable .checkbox {
+    line-height:27px;
+}
+
+.timestable tr:hover {
+    background-color: transparent;
+}
+
+.timestable .amount {
+    text-align: center;
+    border:0;
+    color:#000;
+    font-size: 14px;
+    padding:5px;
+    line-height:14px;
+}
+
+.timestable .registerbutton {
+    padding:5px 0;
+}
+
+.timestable .register td {
+    color:#000;
+    border-top:2px solid #FFF;
+    border-left:2px solid #FFF;
+    font-size: 14px;
+    padding:5px 7px;
+    line-height:16px;
+}
+
+.timestable .register td:first-child {
+    border-left:0;
+}
+
+.timestable .register .username {
+    background: whitesmoke;
+}
+
+.timestable .register .yes {
+    background:#d0e9c6;
+    text-align: center;
+}
+
+.timestable .register .no {
+    background: #ebcccc;
+    text-align: center;
+}
+
+#cookieConsent {
+    position:fixed;
+    bottom:0;
+    right:0;
+    z-index:3;
+    margin:0;
+    padding:1.25rem;
 }

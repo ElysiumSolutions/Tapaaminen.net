@@ -1,2 +1,10 @@
 User-agent: *
-Disallow:
+Disallow: /a/
+Disallow: /s/
+Disallow: /hallinta/
+Disallow: /nayta/
+Disallow: /oma-tili/
+Disallow: /vahvista/
+Disallow: /kirjaudu
+Disallow: /luo-tili
+Disallow: /salasana

@@ -13,6 +13,13 @@ class Setting extends Model
     // We use uuids instead
     public $incrementing = false;
 
+	protected $dates = [
+		'created_at',
+		'updated_at',
+		'deleted_at',
+		'endtime'
+	];
+
     public function meeting(){
         return $this->belongsTo('App\Meeting');
     }

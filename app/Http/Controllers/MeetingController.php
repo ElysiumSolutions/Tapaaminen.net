@@ -10,6 +10,7 @@ use Cocur\Slugify\Slugify;
 use Illuminate\Support\Facades\DB;
 use App\Meeting;
 use App\Setting;
+use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MeetingCreated;
@@ -17,6 +18,77 @@ use Validator;
 
 class MeetingController extends Controller
 {
+
+	public function attach(){
+		return view('meetings.attach');
+	}
+
+	public function attachUser(Request $request){
+
+		$validator = Validator::make($request->all(), [
+			'adminslug' => 'required|url|checkIfAdminurlHasUserAndItExists'
+		],
+		[
+			'check_if_adminurl_has_user_and_it_exists' => 'Tämä tapaaminen on jo liitetty käyttäjätiliin tai sitä ei ole olemassa!'
+		]);
+		if ($validator->fails()) {
+			return redirect('/oma-tili/lunasta')
+				->withErrors($validator)
+				->withInput();
+		}
+		$adminslug = str_replace("/", "", explode('/a/', $request->input('adminslug'))[1]);
+
+		try {
+			$meeting = Meeting::where('adminslug', $adminslug)->firstOrFail();
+		}catch(ModelNotFoundException $e){
+			return response()->view("errors.404", [], 404);
+		}
+
+		$meeting->user_id = Auth::user()->id;
+		$meeting->save();
+
+		$request->session()->put('flashmessage', [
+			'title' => 'Lunastaminen onnistui',
+			'message' => 'Tapaamisen liittäminen omaan tiliin onnistui!',
+			'status' => 'is-success'
+		]);
+		return redirect('/oma-tili');
+	}
+
+	public function password(Request $request, $slug)
+	{
+		try {
+			$meeting = Meeting::where( 'slug', $slug )
+			                  ->with( [
+				                  'settings'
+			                  ] )->firstOrFail();
+		}catch(ModelNotFoundException $e){
+			return response()->view("errors.404", [], 404);
+		}
+
+		$validator = Validator::make($request->all(), [
+			'password' => 'required|checkHashed:'.$meeting->settings->password
+		],
+			[
+				'check_hashed' => 'Virheellinen salasana!',
+			]);
+		if ($validator->fails()) {
+			return redirect('/s/'.$meeting->slug)
+				->withErrors($validator)
+				->withInput();
+		}
+
+		$request->session()->put($meeting->slug, bcrypt($meeting->settings->id));
+
+		$request->session()->put('flashmessage', [
+			'title' => 'Oikea salasana',
+			'message' => 'Tapaamisen salasana oli oikea!',
+			'status' => 'is-success'
+		]);
+
+		return redirect('/s/'.$meeting->slug);
+	}
+
     /**
      * Store a newly created resource in storage.
      *
@@ -141,8 +213,46 @@ class MeetingController extends Controller
     }
 
     public function admin($adminslug){
-        $meeting = Meeting::where('adminslug', $adminslug)->with('user', 'times', 'settings', 'comments')->first();
-        return view('meetings.admin', compact('meeting'));
+
+	    try {
+		    $meeting = Meeting::where( 'adminslug', $adminslug )
+		                      ->with( [
+			                      'user',
+			                      'settings',
+			                      'registrations'=> function ( $query ) {
+				                      $query->orderBy( 'created_at', 'asc' );
+			                      },
+			                      'comments' => function ( $query ) {
+				                      $query->orderBy( 'created_at', 'asc' );
+			                      }
+		                      ] )->firstOrFail();
+	    }catch(ModelNotFoundException $e){
+		    return response()->view("errors.404", [], 404);
+	    }
+
+	    $meetingtimes = Time::where('meeting_id', $meeting->id)->orderBy('day', 'asc')->get();
+	    $times = array();
+	    $amounts = array();
+	    $j = 0;
+	    foreach ($meetingtimes as $time){
+		    $timetime = $time->time;
+		    if($timetime == ""){
+			    $timetime = "Koko";
+		    }
+		    if(!isset($amounts[$time->day->format('n.Y')])) {
+			    $amounts[ $time->day->format( 'n.Y' ) ] = 0;
+		    }
+		    $amounts[$time->day->format('n.Y')]++;
+
+		    $times[$time->day->format('n.Y')][$time->day->format('j')][$j]['time'] = $timetime;
+		    $times[$time->day->format('n.Y')][$time->day->format('j')][$j]['id'] = $time->id;
+
+		    $j++;
+	    }
+
+	    $admin = true;
+
+	    return view('meetings.show', compact('meeting', 'times', 'amounts', 'admin'));
     }
 
     /**
@@ -158,6 +268,9 @@ class MeetingController extends Controller
                       ->with( [
 	                      'user',
 	                      'settings',
+	                      'registrations'=> function ( $query ) {
+		                      $query->orderBy( 'created_at', 'asc' );
+	                      },
 	                      'comments' => function ( $query ) {
 		                      $query->orderBy( 'created_at', 'asc' );
 	                      }
@@ -166,26 +279,37 @@ class MeetingController extends Controller
     		return response()->view("errors.404", [], 404);
 	    }
 
-	    $times = Time::where('meeting_id', $meeting->id)->orderBy('day', 'asc')->get();
+	    if($meeting->settings->password != null){
+	    	if(!Hash::check( $meeting->settings->id, session()->get($meeting->slug))){
+	    		return view('meetings.password', compact('meeting'));
+		    }
+	    }
 
-        /*
-        $registrations = Registration::where('meeting_id', $meeting->id)->oldest()->get();
 
-        $meetingtimes = Time::where('meeting_id', $meeting->id)->orderBy('day', 'asc')->get();
-        $times = array();
-        foreach ($meetingtimes as $day) {
-            $timedata = json_decode($day->times, true);
-            if(count($timedata) > 0){
-                $timedatakeys = array_keys($timedata);
-                for($i = 0; $i < count($timedatakeys); $i++){
-                    $times[$day->day->format('n.Y')][$day->day->format('j')][$timedatakeys[$i]] = $timedata[$timedatakeys[$i]];
-                }
-            }else{
-                $times[$day->day->format('n.Y')][$day->day->format('j')]['time_1'] = "Päivä";
-            }
+        $meetingtimes = Time::where( 'meeting_id', $meeting->id )->orderBy( 'day', 'asc' )->get();
+        $times        = array();
+        $amounts      = array();
+        $j            = 0;
+        foreach ( $meetingtimes as $time ) {
+	        $timetime = $time->time;
+	        if ( $timetime == "" ) {
+		        $timetime = "Koko";
+	        }
+	        if ( ! isset( $amounts[ $time->day->format( 'n.Y' ) ] ) ) {
+		        $amounts[ $time->day->format( 'n.Y' ) ] = 0;
+	        }
+	        $amounts[ $time->day->format( 'n.Y' ) ] ++;
+
+	        $times[ $time->day->format( 'n.Y' ) ][ $time->day->format( 'j' ) ][ $j ]['time'] = $timetime;
+	        $times[ $time->day->format( 'n.Y' ) ][ $time->day->format( 'j' ) ][ $j ]['id']   = $time->id;
+
+	        $j ++;
         }
-        */
-        return view('meetings.show', compact('meeting', 'times'));
+
+        $admin = false;
+
+        return view( 'meetings.show', compact( 'meeting', 'times', 'amounts', 'admin' ) );
+
     }
 
     /**
@@ -199,16 +323,44 @@ class MeetingController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request $request
+	 * @param $adminslug
+	 * @param $part
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+    public function update(Request $request, $adminslug, $part)
     {
-        //
+	    try {
+		    $meeting = Meeting::where( 'adminslug', $adminslug )
+		                      ->with( [
+			                      'settings',
+		                      ] )->firstOrFail();
+	    }catch(ModelNotFoundException $e){
+		    return response()->view("errors.404", [], 404);
+	    }
+
+	    if($part == "basic"){
+	    	// TODO VALIDATION
+		    $meeting->name = $request->input('name');
+		    $meeting->description = $request->input('description');
+		    $meeting->location = $request->input('location');
+		    $meeting->email = $request->input('email');
+		    $meeting->organizer = $request->input('organizer');
+		    $meeting->save();
+
+		    $request->session()->put('flashmessage', [
+			    'title' => 'Muokkaus onnistui',
+			    'message' => 'Tapaamisen tietojen muokkaus onnistui!',
+			    'status' => 'is-success'
+		    ]);
+
+		    return redirect('/a/'.$meeting->adminslug);
+	    }
+
     }
 
     /**
