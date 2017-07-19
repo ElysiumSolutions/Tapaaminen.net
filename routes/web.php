@@ -58,9 +58,9 @@ Route::get('luo-tili', 'Auth\RegisterController@showRegistrationForm')->name('re
 Route::post('luo-tili', 'Auth\RegisterController@register');
 
 // Password Reset Routes...
-Route::get('salasana/nollaa', 'Auth\ForgotPasswordController@showLinkRequestForm');
-Route::post('salasana/sahkoposti', 'Auth\ForgotPasswordController@sendResetLinkEmail');
-Route::get('salasana/nollaa/{token}', 'Auth\ResetPasswordController@showResetForm');
+Route::get('salasana/nollaa', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('salasana/sahkoposti', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('salasana/nollaa/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('salasana/nollaa', 'Auth\ResetPasswordController@reset');
 
 // page routes
