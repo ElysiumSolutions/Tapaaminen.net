@@ -44,10 +44,10 @@
             <p><strong>Apua?!</strong><br />
                 Kaipaatko kenties apua tapaamisen kanssa? Ei huolta, olemme panostaneet myös siihenkin tällä kertaa.</p>
             <p>
-                Tällä hetkellä on kaksi tapaa saada apua! <small>(kolmas tapa on työn alla)</small><br />
                 <ol>
                     <li>Lähetä sähköpostia osoitteeseen apua@tapaaminen.net</li>
                     <li>Kun olemme paikalla tulee oikeaan alanurkkaan livechat jota kautta voi myös pyytää apua</li>
+                    <li>Liity meidän Slackkiin ja kysy apua #tuki kanavalla</li>
                 </ol>
                 <a href="mailto:apua@tapaaminen.net" class="button is-dark is-outlined">apua@tapaaminen.net</a>
             </p>

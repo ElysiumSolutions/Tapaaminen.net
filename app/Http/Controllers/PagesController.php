@@ -37,6 +37,10 @@ class PagesController extends Controller
     	return view('cookies');
     }
 
+	public function slack(){
+		return view('slack');
+	}
+
     public function registerinfo(){
     	return view('registerinfo');
     }
