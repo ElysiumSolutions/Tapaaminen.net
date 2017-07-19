@@ -49,7 +49,6 @@
             <p><strong>Rekisterin suojaus</strong><br />
                 Jokaisella rekister&ouml;ityneell&auml; on k&auml;ytt&ouml;oikeus rekisteriin tietojensa n&auml;kemiseen ja muokkaamiseen h&auml;nelle my&ouml;nnetyll&auml; k&auml;ytt&auml;j&auml;tunnuksella. Rekisteritiedot s&auml;ilytet&auml;&auml;n asianmukaisesti suojatussa palvelimessa ja ovat vain Tapaaminen.net teht&auml;v&auml;&auml;n m&auml;&auml;r&auml;ttyjen henkil&ouml;iden n&auml;ht&auml;viss&auml;.</p>
         </div>
-        </div>
     </div>
 
 @endsection
