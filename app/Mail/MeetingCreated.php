@@ -32,6 +32,7 @@ class MeetingCreated extends Mailable
     {
         return $this
             ->subject('[Tapaaminen.net] Tapaamisen linkit ('.$this->meeting->name.')')
+	        ->replyTo('apua@tapaaminen.net')
             ->markdown('emails.meetings.created');
     }
 }

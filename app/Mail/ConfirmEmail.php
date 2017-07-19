@@ -32,6 +32,7 @@ class ConfirmEmail extends Mailable
     {
         return $this
             ->subject('[Tapaaminen.net] Vahvista sähköpostisi')
+	        ->replyTo('apua@tapaaminen.net')
             ->markdown('emails.users.confirmEmail');
     }
 }
