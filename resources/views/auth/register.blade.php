@@ -68,6 +68,14 @@
                         </p>
                     </div>
 
+                    <div class="field">
+                        <div class="control">
+                            <label class="checkbox">
+                                <input type="checkbox" name="mailchimp_subscribe" value="yes" {{ old('mailchimp_subscribe') ? 'checked' : ''}}> Haluan tiedotteita sähköpostiin
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="field is-grouped">
                         <p class="control">
                             <button type="submit" class="button is-info">Luo tili</button>

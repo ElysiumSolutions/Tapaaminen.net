@@ -43,6 +43,7 @@ Route::post('/oma-tili/lunasta', 'MeetingController@attachUser')->middleware('au
 Route::get('/oma-tili/muokkaa', 'UserController@edit')->middleware('auth');
 Route::patch('/oma-tili/muokkaa', 'UserController@update')->middleware('auth');
 Route::put('/oma-tili/muokkaa', 'UserController@updatePassword')->middleware('auth');
+Route::post('/oma-tili/muokkaa', 'UserController@updateSubscription')->middleware('auth');
 
 //Confirm email routes
 Route::get('/vahvista/sahkoposti', 'UserController@sendEmailConfirmation')->name('confirmEmail')->middleware('auth');

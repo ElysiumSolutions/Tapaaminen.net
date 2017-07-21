@@ -9,6 +9,7 @@ use App\Mail\ConfirmEmail;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use Carbon\Carbon;
+use Newsletter;
 
 class UserController extends Controller
 {
@@ -42,6 +43,31 @@ class UserController extends Controller
 
         }
         return view('users.confirmEmail');
+    }
+
+    public function updateSubscription(Request $request){
+    	$user = Auth::user();
+    	$msg = "";
+    	if($request->input('type') == "subscribe"){
+		    Newsletter::subscribeOrUpdate($user->email, ['NAME'=> $user->name]);
+		    $user->subscribed = true;
+		    $user->save();
+		    $msg = "Saat nyt sähköpostiisi Tapaaminen.net sivuston tiedotteita. Emme lähetä sinulle roskapostia ja voit lopettaa tilauksen koska vain haluat.";
+	    }
+	    if($request->input('type') == "unsubscribe"){
+		    Newsletter::unsubscribe($user->email);
+		    $user->subscribed = false;
+		    $user->save();
+		    $msg = "Et saa enää sähköpostiisi Tapaaminen.net sivuston tiedotteita. Voit halutessasi tilata tiedotteet uudelleen.";
+	    }
+
+	    $request->session()->put('flashmessage', [
+		    'title' => 'Sähköpostitiedotteen tilauksen muokkaus',
+		    'message' => $msg,
+		    'status' => 'is-success'
+	    ]);
+
+	    return redirect('/oma-tili/muokkaa');
     }
 
     public function confirmEmail(Request $request){

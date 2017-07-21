@@ -7,7 +7,17 @@
     <div class="columns">
         <div class="column is-half">
             <div class="box">
-                <h3 class="title is-4">Perustiedot</h3>
+                <h3 class="title is-4">
+                    Perustiedot
+                    <form role="form" method="POST" action="{{ url('/oma-tili/muokkaa') }}" class="pull-right">
+                        {{ csrf_field() }}
+                        @if(Auth::user()->subscribed)
+                            <button type="submit" name="type" value="unsubscribe" class="button is-warning is-small">Peru sähköpostitiedotteet</button>
+                        @else
+                            <button type="submit" name="type" value="subscribe" class="button is-success is-small">Tilaa sähköpostitiedotteet</button>
+                        @endif
+                    </form>
+                </h3>
 
                 <form role="form" method="POST" action="{{ url('/oma-tili/muokkaa') }}">
                     {{ csrf_field() }}

@@ -171,6 +171,7 @@ return [
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 	    Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 	    Spatie\CookieConsent\CookieConsentServiceProvider::class,
+	    Spatie\Newsletter\NewsletterServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
+        'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
 
     ],
 
