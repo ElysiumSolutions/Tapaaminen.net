@@ -27535,6 +27535,15 @@ $(document).ready(function () {
             $("#post-" + postid + "-feedback").fadeOut(4000);
         });
     });
+
+    $(".openModal").click(function () {
+        var modalId = $(this).data('target');
+        $("#" + modalId).addClass('is-active');
+    });
+
+    $(".closeModal").click(function () {
+        $("#" + $(this).data('target')).removeClass('is-active');
+    });
 });
 
 window.removeTimeRow = function (date) {
@@ -27632,10 +27641,9 @@ $(".button-reply").click(function () {
 });
 
 $(".timestable .registration .timecell").click(function () {
-    alert($(this + ".checkbox").val());
-    $(this).parent().children(".checkbox").prop("checked", !$(this).parent().children(".checkbox").prop("checked"));
+    $(this).find("input").prop("checked", !$(this).find("input").prop("checked"));
 });
-$(".timestable .registration .timecell .checkbox").click(function () {
+$(".timestable .registration .timecell input").click(function () {
     $(this).prop("checked", !$(this).prop("checked"));
 });
 

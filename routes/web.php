@@ -69,6 +69,7 @@ Route::get('evasteet', 'PagesController@cookies');
 Route::get('rekisteriseloste', 'PagesController@registerinfo');
 Route::get('tietoa', 'PagesController@about');
 Route::get('slack', 'PagesController@slack');
+Route::get('tiedotteet', 'PagesController@announcements');
 
 //legacy routes
 Route::get('/nayta/{id}', function($id){

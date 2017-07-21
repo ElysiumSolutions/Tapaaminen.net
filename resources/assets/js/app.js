@@ -51,6 +51,15 @@ $(document).ready(function(){
             $("#post-"+postid+"-feedback").fadeOut(4000);
         });
     });
+
+    $(".openModal").click(function(){
+       var modalId = $(this).data('target');
+       $("#"+modalId).addClass('is-active');
+    });
+
+    $(".closeModal").click(function(){
+       $("#"+$(this).data('target')).removeClass('is-active');
+    });
 });
 
 window.removeTimeRow = function(date){
