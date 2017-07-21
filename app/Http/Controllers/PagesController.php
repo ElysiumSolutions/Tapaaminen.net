@@ -87,7 +87,7 @@ class PagesController extends Controller
 		    $campaigndata = $mailchimp->get( '/campaigns', [
 			    'count'   => 100,
 			    'list_id' => env( 'MAILCHIMP_LIST_ID' ),
-			    'status' => 'save'
+			    'status' => 'sent'
 		    ] );
 
 		    $announcementsarray = array();
