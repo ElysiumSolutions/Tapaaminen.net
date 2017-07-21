@@ -70,6 +70,7 @@ Route::get('rekisteriseloste', 'PagesController@registerinfo');
 Route::get('tietoa', 'PagesController@about');
 Route::get('slack', 'PagesController@slack');
 Route::get('tiedotteet', 'PagesController@announcements');
+Route::post('tiedotteet', 'PagesController@subscribe');
 
 //legacy routes
 Route::get('/nayta/{id}', function($id){

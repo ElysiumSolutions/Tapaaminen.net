@@ -8,6 +8,9 @@ use App\User;
 use App\Comment;
 use Illuminate\Support\Facades\Cache;
 use DrewM\MailChimp\MailChimp;
+use Illuminate\Http\Request;
+use Newsletter;
+use Validator;
 
 class PagesController extends Controller
 {
@@ -50,6 +53,33 @@ class PagesController extends Controller
     	return view('about', compact('robots'));
     }
 
+    public function subscribe(Request $request){
+	    $validationrules = [
+		    'name' => 'required',
+		    'email' => 'required|email',
+		    'g-recaptcha-response' => 'required|grecaptcha'
+	    ];
+	    $validator = Validator::make($request->all(), $validationrules,
+		    [
+			    'grecaptcha' => 'Virheellinen ihmisyystarkastus!',
+		    ]);
+	    if ($validator->fails()) {
+		    return redirect('/tiedotteet')
+			    ->withErrors($validator)
+			    ->withInput();
+	    }
+
+	    Newsletter::subscribeOrUpdate($request->input('email'), ['NAME'=> $request->input('name')]);
+
+	    $request->session()->put('flashmessage', [
+		    'title' => 'Tiedotteiden tilaus onnistui',
+		    'message' => 'Tiedotteiden tilaus onnistui, saat nyt sähköpostiisi uusimmat tiedotteet automaattisesti.',
+		    'status' => 'is-success'
+	    ]);
+
+	    return redirect('/tiedotteet');
+    }
+
     public function announcements(){
 	    $announcements = Cache::remember('mailchimpannouncements', 1, function () {
 		    $mailchimp = new MailChimp( env( 'MAILCHIMP_APIKEY' ) );
@@ -57,7 +87,7 @@ class PagesController extends Controller
 		    $campaigndata = $mailchimp->get( '/campaigns', [
 			    'count'   => 100,
 			    'list_id' => env( 'MAILCHIMP_LIST_ID' ),
-			    'status' => 'sent'
+			    'status' => 'save'
 		    ] );
 
 		    $announcementsarray = array();
