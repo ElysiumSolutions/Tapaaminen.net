@@ -65,9 +65,11 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 	    $subscribed = false;
-    	if($data['mailchimp_subscribe'] == 'yes'){
-		    Newsletter::subscribeOrUpdate($data['email'], ['NAME' => $data['name']]);
-			$subscribed = true;
+	    if(isset($data['mailchimp_subscribe'])) {
+		    if ( $data['mailchimp_subscribe'] == 'yes' ) {
+			    Newsletter::subscribeOrUpdate( $data['email'], [ 'NAME' => $data['name'] ] );
+			    $subscribed = true;
+		    }
 	    }
 
         $user = User::create([
