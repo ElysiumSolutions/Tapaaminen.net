@@ -24,10 +24,10 @@ class PagesController extends Controller
 		    );
 	    });
 
-	    $meetingcount = $statsdata['meetingcount'];
-        $usercount = $statsdata['usercount'];
-        $commentcount = $statsdata['commentcount'];
-        $registrationcount = $statsdata['registrationcount'];
+	    $meetingcount = number_format($statsdata['meetingcount'], 0, ",", " ");
+        $usercount = number_format($statsdata['usercount'], 0, ",", " ");
+        $commentcount = number_format($statsdata['commentcount'], 0, ",", " ");
+        $registrationcount = number_format($statsdata['registrationcount'], 0, ",", " ");
 	    $robots = true;
         return view('home', compact('meetingcount', 'usercount', 'registrationcount', 'commentcount', 'robots'));
     }
