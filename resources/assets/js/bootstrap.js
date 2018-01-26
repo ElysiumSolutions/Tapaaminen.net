@@ -9,6 +9,14 @@ window._ = require('lodash');
 
 window.$ = window.jQuery = require('jquery');
 
+import fontawesome from '@fortawesome/fontawesome'
+import faHome from '@fortawesome/fontawesome-free-solid/faHome'
+import faBrands from '@fortawesome/fontawesome-free-brands'
+
+fontawesome.library.add(faHome);
+fontawesome.library.add(faBrands.faTwitter);
+fontawesome.library.add(faBrands.faGithub);
+
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
  * using reactive data binding and reusable components. Vue's API is clean

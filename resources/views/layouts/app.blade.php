@@ -72,42 +72,44 @@
 <body>
     <div id="app">
 
-        <section class="hero is-dark is-bold">
+        <section class="hero is-dark">
             <div class="hero-head">
-                <header class="nav">
+                <header class="navbar">
                     <div class="container">
-                        <div class="nav-left">
-                            <a class="nav-item" href="{{ url('/') }}"><span class="icon"><i class="fa fa-home"></i></span></a>
-                            <a class="nav-item" href="https://twitter.com/MarkoK" target="_blank"><span class="icon"><i class="fa fa-twitter"></i></span></a>
-                            <a class="nav-item" href="https://github.com/ElysiumSolutions/Tapaaminen.net" target="_blank"><span class="icon"><i class="fa fa-github"></i></span></a>
+                        <div class="navbar-brand">
+                            <a class="navbar-item" href="{{ url('/') }}"><span class="icon"><i class="fas fa-home fa-lg"></i></span></a>
+                            <a class="navbar-item" href="https://twitter.com/MarkoK" target="_blank"><span class="icon"><i class="fab fa-twitter fa-lg"></i></span></a>
+                            <a class="navbar-item" href="https://github.com/ElysiumSolutions/Tapaaminen.net" target="_blank"><span class="icon"><i class="fab fa-github fa-lg"></i></span></a>
+
+                            <button class="button is-dark navbar-burger" data-target="navMenu">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </button>
                         </div>
+                        <div class="navbar-menu" id="navMenu">
 
-                        <span class="nav-toggle" id="nav-toggle">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
+                            <div class="navbar-end">
+                                {{--<a href="{{ url('/palsta') }}" class="navbar-item">Palsta</a>--}}
+                                <a href="{{ url('/tiedotteet') }}" class="navbar-item">Tiedotteet</a>
+                                <a href="{{ url('/tietoa') }}" class="navbar-item">Tietoa</a>
+                                <a href="{{ url('/slack') }}" class="navbar-item">Slack</a>
+                                @if (Auth::guest())
+                                    <a href="{{ url('/luo-tili') }}" class="navbar-item">Luo tili</a>
+                                    <a href="{{ url('/kirjaudu') }}" class="navbar-item">Kirjaudu sisään</a>
+                                @else
+                                    <a href="{{ url('/oma-tili') }}" class="navbar-item">Oma tili</a>
+                                    <a class="navbar-item" href="{{ url('/ulos') }}"
+                                       onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                        Kirjaudu ulos
+                                    </a>
 
-                        <div class="nav-right nav-menu">
-                            {{--<a href="{{ url('/palsta') }}" class="nav-item">Palsta</a>--}}
-                            <a href="{{ url('/tiedotteet') }}" class="nav-item">Tiedotteet</a>
-                            <a href="{{ url('/tietoa') }}" class="nav-item">Tietoa</a>
-                            <a href="{{ url('/slack') }}" class="nav-item">Slack</a>
-                            @if (Auth::guest())
-                                <a href="{{ url('/luo-tili') }}" class="nav-item">Luo tili</a>
-                                <a href="{{ url('/kirjaudu') }}" class="nav-item">Kirjaudu sisään</a>
-                            @else
-                                <a href="{{ url('/oma-tili') }}" class="nav-item">Oma tili</a>
-                                <a class="nav-item" href="{{ url('/ulos') }}"
-                                   onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
-                                    Kirjaudu ulos
-                                </a>
-
-                                <form id="logout-form" action="{{ url('/ulos') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            @endif
+                                    <form id="logout-form" action="{{ url('/ulos') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </header>
