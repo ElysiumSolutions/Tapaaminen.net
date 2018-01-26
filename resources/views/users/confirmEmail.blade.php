@@ -20,7 +20,7 @@
                             <input id="code" type="text" class="input{{ $errors->has('code') ? ' is-danger' : '' }}" name="code" placeholder="Vahvistuskoodi" value="{{ old('code') }}" required autofocus>
                             @if ($errors->has('code'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('code') }}</span>
                             @endif

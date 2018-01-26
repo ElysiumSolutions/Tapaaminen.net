@@ -42,7 +42,7 @@
                     <tr class="register">
                         <td class="username">
                                     <span class="icon is-small is-left">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fas fa-user"></i>
                                     </span>
                             {{ $registration->username }}
                         </td>
@@ -60,7 +60,7 @@
 
                                         <td class="yes">
                                                     <span class="icon is-small">
-                                                        <i class="fa fa-check"></i>
+                                                        <i class="fas fa-check"></i>
                                                     </span>
                                         </td>
                                     @else
@@ -72,7 +72,7 @@
                         <td>
                             <button name="registration" value="{{ $registration->id }}" class="button is-danger is-small is-outlined">
                                 <span class="icon is-small">
-                                    <i class="fa fa-times"></i>
+                                    <i class="fas fa-times"></i>
                                 </span>
                                 <span>Poista</span>
                             </button>

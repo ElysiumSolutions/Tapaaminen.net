@@ -22,7 +22,7 @@
                             <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" placeholder="Sähköposti" value="{{ old('email') }}" required autofocus>
                             @if ($errors->has('email'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('email') }}</span>
                             @endif

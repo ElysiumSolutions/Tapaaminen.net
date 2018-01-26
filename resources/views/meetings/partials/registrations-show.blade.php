@@ -38,7 +38,7 @@
                     <tr class="register">
                         <td class="username">
                                     <span class="icon is-small is-left">
-                                        <i class="fa fa-user"></i>
+                                        <i class="fas fa-user"></i>
                                     </span>
                             @if($meeting->settings->shownames)
                                 {{ $registration->username }}
@@ -60,7 +60,7 @@
 
                                         <td class="yes">
                                                     <span class="icon is-small">
-                                                        <i class="fa fa-check"></i>
+                                                        <i class="fas fa-check"></i>
                                                     </span>
                                         </td>
                                     @else
@@ -81,7 +81,7 @@
 
                                 <input class="input is-small" type="text" name="name" placeholder="Nimesi" value="{{ old('name', $defaultname) }}">
                                 <span class="icon is-small is-left">
-                                            <i class="fa fa-user"></i>
+                                            <i class="fas fa-user"></i>
                                         </span>
                             </p>
                         </div>

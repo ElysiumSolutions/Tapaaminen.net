@@ -21,7 +21,7 @@
                     @foreach($meetings as $meeting)
                         <a class="panel-block" href="{{ url('/s/'.$meeting->slug) }}">
                             <span class="panel-icon">
-                                <i class="fa fa-calendar"></i>
+                                <i class="fas fa-calendar"></i>
                             </span>
                             {{ $meeting->name }}
                         </a>
@@ -41,7 +41,7 @@
                     @foreach($registrations as $registration)
                         <a class="panel-block" href="/s/{{ $registration->meeting->slug }}">
                             <span class="panel-icon">
-                                <i class="fa fa-calendar"></i>
+                                <i class="fas fa-calendar"></i>
                             </span>
                             {{ $registration->meeting->name }}
                         </a>

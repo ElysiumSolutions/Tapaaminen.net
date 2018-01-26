@@ -15,7 +15,7 @@
                             <input id="name" type="text" class="input{{ $errors->has('name') ? ' is-danger' : '' }}" name="name" placeholder="Nimi" value="{{ old('name') }}" required autofocus>
                             @if ($errors->has('name'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('name') }}</span>
                             @endif
@@ -28,7 +28,7 @@
                             <input id="username" type="text" class="input{{ $errors->has('username') ? ' is-danger' : '' }}" name="username" placeholder="Käyttäjätunnus" value="{{ old('username') }}" required >
                             @if ($errors->has('username'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('username') }}</span>
                             @endif
@@ -41,7 +41,7 @@
                             <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" placeholder="Sähköposti" value="{{ old('email') }}" required>
                             @if ($errors->has('email'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('email') }}</span>
                             @endif
@@ -54,7 +54,7 @@
                             <input id="password" type="password" class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password" required>
                             @if ($errors->has('password'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('password') }}</span>
                             @endif

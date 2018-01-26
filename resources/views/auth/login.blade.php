@@ -15,7 +15,7 @@
                             <input id="email" type="email" class="input{{ $errors->has('email') ? ' is-danger' : '' }}" name="email" placeholder="Sähköposti" value="{{ old('email') }}" required autofocus>
                             @if ($errors->has('email'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('email') }}</span>
                             @endif
@@ -28,7 +28,7 @@
                             <input id="password" type="password" class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password" required>
                             @if ($errors->has('password'))
                                 <span class="icon is-small">
-                                    <i class="fa fa-warning"></i>
+                                    <i class="fas fa-exclamation-triangle"></i>
                                 </span>
                                 <span class="help is-danger">{{ $errors->first('password') }}</span>
                             @endif
