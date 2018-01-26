@@ -74,7 +74,7 @@
                     Tawk_API.setAttributes({
                         'name'  : '{{ Auth::user()->name }}',
                         'email' : '{{ Auth::user()->email }}',
-                        'hash'  : '<?php echo hash_hmac("sha256", Auth::user()->email, env('TAWK_API_KEY')); ?>'
+                        'hash'  : '<?php echo hash_hmac("sha256", Auth::user()->email, config('tawk.apiKey')); ?>'
                     }, function(error){});
                 }
             </script>

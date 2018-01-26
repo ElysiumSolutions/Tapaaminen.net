@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
             $client = new Client;
             $r = $client->post('https://www.google.com/recaptcha/api/siteverify', [
                 'query' => [
-                    'secret' => env('RECAPTCHA_SECRET'),
+                    'secret' => config('google.recaptcha.secret'),
                     'response' => $value
                 ]]);
             $payload = json_decode($r->getBody()->getContents());

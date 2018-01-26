@@ -105,7 +105,7 @@
                                     @if(Auth::guest())
                                         <div class="field">
                                             <label class="label">Ihmisyystarkastus</label>
-                                            <p class="control"><div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div><br /></p>
+                                            <p class="control"><div class="g-recaptcha" data-sitekey="{{ config('google.recaptcha.sitekey') }}"></div><br /></p>
                                         </div>
                                     @endif
                                 </div>

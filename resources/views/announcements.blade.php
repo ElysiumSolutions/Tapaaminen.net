@@ -58,7 +58,7 @@
                     <div class="field">
                         <label class="label">Ihmisyystarkastus</label>
                         <p class="control">
-                            <div class="g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITEKEY') }}"></div>
+                            <div class="g-recaptcha" data-sitekey="{{ config('google.recaptcha.sitekey') }}"></div>
                             @if ($errors->has('g-recaptcha-response'))
 
                                 <span class="help is-danger">{{ $errors->first('g-recaptcha-response') }}</span>

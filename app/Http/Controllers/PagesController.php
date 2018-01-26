@@ -82,11 +82,11 @@ class PagesController extends Controller
 
     public function announcements(){
 	    $announcements = Cache::remember('mailchimpannouncements', 1, function () {
-		    $mailchimp = new MailChimp( env( 'MAILCHIMP_APIKEY' ) );
+		    $mailchimp = new MailChimp( config('laravel-newsletter.apiKey') );
 
 		    $campaigndata = $mailchimp->get( '/campaigns', [
 			    'count'   => 100,
-			    'list_id' => env( 'MAILCHIMP_LIST_ID' ),
+			    'list_id' => config('laravel-newsletter.lists.tiedotteet.id'),
 			    'status' => 'sent'
 		    ] );
 
