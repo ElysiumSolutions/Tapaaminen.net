@@ -79,11 +79,11 @@
             <p class="control">
                 @if($meeting->settings->socialmediabuttons)
                     <button type="submit" name="target" class="button is-warning" value="hideSocialmediabuttons">
-                        <span>Piilota osallistujien nimet</span>
+                        <span>Piilota sosiaalisen median painikkeet</span>
                     </button>
                 @else
                     <button type="submit" name="target" class="button is-success" value="showSocialmediabuttons">
-                        <span>Näytä osallistujien nimet</span>
+                        <span>Näytä sosiaalisen median painikkeet</span>
                     </button>
                 @endif
             </p>
