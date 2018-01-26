@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 require('./jquery-ui.min');
+require('./fontawesome');
 
 document.addEventListener('DOMContentLoaded', function () {
 
