@@ -55,30 +55,6 @@
         <!-- mailchimp -->
         <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/d8e735d6779431a48711add6e/9450c154e84779b9740e5b68d.js");</script>
 
-        <!-- Tawk.to -->
-        <script type="text/javascript">
-            var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-            (function(){
-                var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-                s1.async=true;
-                s1.src='https://embed.tawk.to/596ce0d01dc79b329518ec07/default';
-                s1.charset='UTF-8';
-                s1.setAttribute('crossorigin','*');
-                s0.parentNode.insertBefore(s1,s0);
-            })();
-        </script>
-
-        @if(Auth::check())
-            <script type="text/javascript">
-                Tawk_API.onLoad = function(){
-                    Tawk_API.setAttributes({
-                        'name'  : '{{ Auth::user()->name }}',
-                        'email' : '{{ Auth::user()->email }}',
-                        'hash'  : '<?php echo hash_hmac("sha256", Auth::user()->email, config('tawk.apiKey')); ?>'
-                    }, function(error){});
-                }
-            </script>
-        @endif
     @endif
 
     <!-- Styles -->
