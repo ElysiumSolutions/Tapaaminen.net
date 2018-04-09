@@ -26,6 +26,12 @@ class UserController extends Controller
 
     public function sendEmailConfirmation(){
         $user = Auth::User();
+        if(($user->emailVerificationSendDate == null || $user->emailVerificationSendDate->toDateString() < Carbon::now()->toDateString()) && $user->emailVerificationToken != null){
+            $user->emailVerificationToken = null;
+            $user->emailVerificationSendDate = null;
+            $user->save();
+        }
+
         if($user->emailVerificationToken == null){
             $token = str_random(40);
             $tokens = DB::table('users')->where('emailVerificationToken', $token)->get();
@@ -37,6 +43,7 @@ class UserController extends Controller
             }
 
             $user->emailVerificationToken = bcrypt($token);
+            $user->emailVerificationSendDate = Carbon::now();
             $user->save();
 
             Mail::to($user)->send(new ConfirmEmail($token));
