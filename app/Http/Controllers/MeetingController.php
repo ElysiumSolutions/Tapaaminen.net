@@ -283,7 +283,11 @@ class MeetingController extends Controller
 	    	if(!Hash::check( $meeting->settings->id, session()->get($meeting->slug))){
 	    		return view('meetings.password', compact('meeting'));
 		    }
-	    }
+		}
+		
+		if($meeting->settings->locked){
+			return view('meetings.locked');
+		}
 
 
         $meetingtimes = Time::where( 'meeting_id', $meeting->id )->orderBy( 'day', 'asc' )->get();

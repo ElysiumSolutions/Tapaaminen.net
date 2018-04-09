@@ -144,7 +144,19 @@ class SettingController extends Controller
 		    $settings->shownames = true;
 		    $settings->save();
 		    $message = "Osallistujien nimien näyttö onnistui!";
-	    }
+		}
+		
+		if($target == "lockMeeting"){
+			$settings->locked = true;
+			$settings->save();
+			$message = "Tapaaminen lukittu!";
+		}
+		
+		if($target == "unlockMeeting"){
+			$settings->locked = false;
+			$settings->save();
+			$message = "Tapaamisen lukitus avattu!";
+		}
 
 	    if($target == "hideSocialmediabuttons"){
 		    $settings->socialmediabuttons = false;

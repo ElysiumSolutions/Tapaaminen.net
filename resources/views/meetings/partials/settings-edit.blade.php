@@ -30,6 +30,21 @@
         @endif
 
         <div class="field">
+            <p class="label">Tapaamisen lukitseminen</p>
+            <p class="control">
+                @if($meeting->settings->locked)
+                    <button type="submit" name="target" class="button is-success" value="unlockMeeting">
+                        <span>Poista lukitus</span>
+                    </button>
+                @else
+                    <button type="submit" name="target" class="button is-warning" value="lockMeeting">
+                        <span>Lukitse</span>
+                    </button>
+                @endif
+            </p>
+        </div>
+
+        <div class="field">
             <p class="label">Kommentointi</p>
             <p class="control">
                 @if($meeting->settings->comments)
