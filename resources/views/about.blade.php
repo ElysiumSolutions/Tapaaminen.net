@@ -64,7 +64,6 @@
                             <p><strong>Groove</strong> on käytössä sähköpostituessa. <a href="https://www.groovehq.com/" class="button is-small is-black is-outlined" target="_blank">groovehq.com</a></p>
                             <p><strong>Bugsnag</strong> ilmoittaa automaattisesti virheistä. <a href="https://www.bugsnag.com/" class="button is-small is-black is-outlined" target="_blank">bugsnag.com</a></p>
                             <p><strong>Github</strong> on käytössä versionhallinnassa. <a href="https://github.com/" class="button is-small is-black is-outlined" target="_blank">github.com</a></p>
-                            <p><strong>Tawk.to</strong> on käytössä livechatissä. <a href="https://www.tawk.to/" class="button is-small is-black is-outlined" target="_blank">tawk.to</a></p>
                             <p><strong>Marko Kaartinen</strong> on koodannut tämän. <a href="https://markokaartinen.net" class="button is-small is-black is-outlined" target="_blank">markokaartinen.net</a></p>
                             <p><strong>Laravel</strong> on käytössä frameworkkinä. <a href="https://laravel.com/" class="button is-small is-black is-outlined" target="_blank">laravel.com</a></p>
                         </div>
