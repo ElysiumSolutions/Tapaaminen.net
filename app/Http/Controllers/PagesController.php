@@ -28,7 +28,7 @@ class PagesController extends Controller
         $usercount = number_format($statsdata['usercount'], 0, ",", " ");
         $commentcount = number_format($statsdata['commentcount'], 0, ",", " ");
         $registrationcount = number_format($statsdata['registrationcount'], 0, ",", " ");
-	    $robots = true;
+        $robots = true;
         return view('home', compact('meetingcount', 'usercount', 'registrationcount', 'commentcount', 'robots'));
     }
 

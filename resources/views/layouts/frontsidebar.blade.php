@@ -1,3 +1,6 @@
+@if(config('tapaaminen.notification_text') != "")
+    @include('layouts.notification')
+@endif
 <article class="message is-success">
     <div class="message-body">
         <strong>Tervetuloa Tapaaminen.net sivustolle!</strong><br />
