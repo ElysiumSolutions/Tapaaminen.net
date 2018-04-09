@@ -105,4 +105,18 @@
         </div>
 
     </form>
+
+    <form method="post" action="{{ url('/a/'.$meeting->adminslug) }}">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+        <div class="field" style="margin-top:0.75rem;">
+            <p class="label">Tapaamisen poistaminen</p>
+            <p class="control">
+                <button type="submit" class="button is-danger">
+                    <span>Poista tapaaminen</span>
+                </button>
+            </p>
+        </div>
+
+    </form>
 </div>

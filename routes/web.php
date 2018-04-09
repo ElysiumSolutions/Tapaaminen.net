@@ -15,6 +15,8 @@
 Route::get('/', 'PagesController@index');
 Route::post('/', 'MeetingController@store');
 Route::get('/a/{adminslug}', 'MeetingController@admin');
+Route::delete('/a/{adminslug}', 'MeetingController@destroy');
+Route::put('/a/{adminslug}', 'MeetingController@restore');
 Route::get('/s/{slug}', 'MeetingController@show');
 Route::post('/s/{slug}', 'CommentController@store');
 Route::post('/s/{slug}/password', 'MeetingController@password');

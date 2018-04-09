@@ -225,10 +225,14 @@ class MeetingController extends Controller
 			                      'comments' => function ( $query ) {
 				                      $query->orderBy( 'created_at', 'asc' );
 			                      }
-		                      ] )->firstOrFail();
+		                      ] )->withTrashed()->firstOrFail();
 	    }catch(ModelNotFoundException $e){
 		    return response()->view("errors.404", [], 404);
-	    }
+		}
+		
+		if($meeting->trashed()){
+			return view('meetings.deletedAdmin', compact('meeting'));
+		}
 
 	    $meetingtimes = Time::where('meeting_id', $meeting->id)->orderBy('day', 'asc')->get();
 	    $times = array();
@@ -274,10 +278,14 @@ class MeetingController extends Controller
 	                      'comments' => function ( $query ) {
 		                      $query->orderBy( 'created_at', 'asc' );
 	                      }
-                      ] )->firstOrFail();
+                      ] )->withTrashed()->firstOrFail();
 	    }catch(ModelNotFoundException $e){
     		return response()->view("errors.404", [], 404);
-	    }
+		}
+		
+		if($meeting->trashed()){
+			return view('meetings.deleted');
+		}
 
 	    if($meeting->settings->password != null){
 	    	if(!Hash::check( $meeting->settings->id, session()->get($meeting->slug))){
@@ -288,7 +296,6 @@ class MeetingController extends Controller
 		if($meeting->settings->locked){
 			return view('meetings.locked');
 		}
-
 
         $meetingtimes = Time::where( 'meeting_id', $meeting->id )->orderBy( 'day', 'asc' )->get();
         $times        = array();
@@ -373,8 +380,41 @@ class MeetingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $adminslug)
     {
-        //
+        try {
+		    $meeting = Meeting::where( 'adminslug', $adminslug )->firstOrFail();
+	    }catch(ModelNotFoundException $e){
+		    return response()->view("errors.404", [], 404);
+		}
+		
+		$meeting->delete();
+		
+		$request->session()->put( 'flashmessage', [
+			'title'   => "Tapaaminen poistettu",
+			'message' => "Tapaaminen on poistettu onnistuneesti!",
+			'status'  => 'is-success'
+		] );
+
+	    return redirect('/a/'.$adminslug);
+	}
+	
+	public function restore(Request $request, $adminslug)
+    {
+        try {
+		    $meeting = Meeting::where( 'adminslug', $adminslug )->withTrashed()->firstOrFail();
+	    }catch(ModelNotFoundException $e){
+		    return response()->view("errors.404", [], 404);
+		}
+		
+		$meeting->restore();
+		
+		$request->session()->put( 'flashmessage', [
+			'title'   => "Tapaaminen palautettu",
+			'message' => "Tapaaminen on palautettu onnistuneesti!",
+			'status'  => 'is-success'
+		] );
+
+	    return redirect('/a/'.$adminslug);
     }
 }
