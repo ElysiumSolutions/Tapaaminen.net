@@ -7,6 +7,7 @@ use App\Registration;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 class RegistrationController extends Controller
 {
@@ -98,9 +99,36 @@ class RegistrationController extends Controller
      * @param  \App\Registration  $registration
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Registration $registration)
+    public function update(Request $request, $adminslug)
     {
-        //
+		$validationrules = [
+			'registration' => 'required',
+            'registrations' => 'required|array'
+        ];
+
+        $validator = Validator::make($request->all(), $validationrules);
+        if ($validator->fails()) {
+            return redirect('/a/'.$adminslug)
+                ->withErrors($validator)
+                ->withInput();
+		}
+
+		try {
+			$registration = Registration::where( 'id', $request->input('registration') )->firstOrFail();
+		}catch(ModelNotFoundException $e){
+			return response()->view("errors.404", [], 404);
+		}
+
+		$registration->times = json_encode($request->input('registrations'));
+		$registration->save();
+
+		$request->session()->put('flashmessage', [
+			'title' => 'Ilmoittautumisen muokkaus',
+			'message' => 'Ilmoittautumisen muokkaus onnistui!',
+			'status' => 'is-success'
+		]);
+
+		return redirect('/a/'.$adminslug);
     }
 
 	/**

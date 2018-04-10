@@ -23,6 +23,7 @@ Route::post('/s/{slug}/password', 'MeetingController@password');
 
 Route::post('/s/{slug}/times', 'RegistrationController@store');
 Route::delete('/a/{adminslug}/registrations', 'RegistrationController@destroy');
+Route::patch('/a/{adminslug}/registrations/update', 'RegistrationController@update');
 Route::patch('/a/{adminslug}/settings', 'SettingController@update');
 Route::delete('/a/{adminslug}/comments', 'CommentController@destroy');
 Route::get('/a/{adminslug}/times/add', 'TimeController@create');
