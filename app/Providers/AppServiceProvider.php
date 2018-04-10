@@ -32,7 +32,11 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Validator::extend('checkIfAdminurlHasUserAndItExists', function($attribute, $value, $parameters){
-        	$adminslug = str_replace("/", "", explode('/a/', $value)[1]);
+            $parts = explode('/a/', $value);
+            if(!isset($parts[1])){
+                return false;
+            }
+        	$adminslug = str_replace("/", "", $parts[1]);
 	        try {
 		        $meeting = \App\Meeting::where('adminslug', $adminslug)->firstOrFail();
 	        }catch(ModelNotFoundException $e){
