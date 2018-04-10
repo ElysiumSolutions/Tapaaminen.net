@@ -1,4 +1,8 @@
 <div class="box" id="registration">
+    <div class="is-pulled-right">
+        <a href="{{ url('/a/'.$meeting->adminslug.'/times/add') }}" class="button is-success">Lisää aika</a>
+        <a href="{{ url('/a/'.$meeting->adminslug.'/times/remove') }}" class="button is-danger">Poista aika</a>
+    </div>
     <h3 class="title is-4">Muokkaa ilmoittautumisia</h3>
     <form role="form" method="POST" action="{{ url('/a/'.$meeting->adminslug.'/registrations') }}">
         {{ csrf_field() }}

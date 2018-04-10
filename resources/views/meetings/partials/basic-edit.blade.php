@@ -8,7 +8,7 @@
         <div class="field">
             <label class="label">Tapaamisen nimi <small>(esim. Lounas, Palaveri)</small></label>
             <p class="control">
-                <input class="input" name="name" type="text" value="{{ old('name', $meeting->name) }}" placeholder="Anna tapaamisen nimi" required autofocus>
+                <input class="input" name="name" type="text" value="{{ old('name', $meeting->name) }}" placeholder="Anna tapaamisen nimi" required>
             </p>
         </div>
 

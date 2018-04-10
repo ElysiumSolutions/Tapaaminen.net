@@ -25,6 +25,10 @@ Route::post('/s/{slug}/times', 'RegistrationController@store');
 Route::delete('/a/{adminslug}/registrations', 'RegistrationController@destroy');
 Route::patch('/a/{adminslug}/settings', 'SettingController@update');
 Route::delete('/a/{adminslug}/comments', 'CommentController@destroy');
+Route::get('/a/{adminslug}/times/add', 'TimeController@create');
+Route::post('/a/{adminslug}/times/add', 'TimeController@store');
+Route::get('/a/{adminslug}/times/remove', 'TimeController@remove');
+Route::delete('/a/{adminslug}/times/remove', 'TimeController@destroy');
 Route::patch('/a/{adminslug}/{part}', 'MeetingController@update');
 
 // bbs routes
