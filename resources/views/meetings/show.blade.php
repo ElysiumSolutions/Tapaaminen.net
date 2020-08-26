@@ -40,7 +40,7 @@
         @include('meetings.partials.registrations-show')
     @endif
 
-    @if($meeting->settings->comments)
+    @if($settings->comments)
         <div class="box" id="comments">
             <h3 class="title is-4">Keskustelu</h3>
             @if(count($meeting->comments) == 0)

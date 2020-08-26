@@ -12,7 +12,7 @@
                 <div class="field">
                     <p class="label">Tapaamisen lukitseminen</p>
                     <p class="control">
-                        @if($meeting->settings->locked)
+                        @if($settings->locked)
                             <button type="submit" name="target" class="button is-success" value="unlockMeeting">
                                 <span>Poista lukitus</span>
                             </button>
@@ -28,7 +28,7 @@
                 <div class="field">
                     <p class="label">Kommentointi</p>
                     <p class="control">
-                        @if($meeting->settings->comments)
+                        @if($settings->comments)
                             <button type="submit" name="target" class="button is-warning" value="hideComments">
                                 <span>Piilota kommentointi</span>
                             </button>
@@ -42,7 +42,7 @@
             </div>
             <div class="column">
                 <p class="label">Aseta tapaamiselle salasana</p>
-                @if($meeting->settings->password != null)
+                @if($settings->password != null)
                     <div class="field">
                         <p class="control">
                             <button type="submit" name="target" class="button is-warning" value="removePassword">
@@ -69,7 +69,7 @@
                 <div class="field">
                     <p class="label">Oma sähköposti</p>
                     <p class="control">
-                        @if($meeting->settings->showemail)
+                        @if($settings->showemail)
                             <button type="submit" name="target" class="button is-warning" value="hideEmail">
                                 <span>Piilota oma sähköposti</span>
                             </button>
@@ -85,7 +85,7 @@
                 <div class="field">
                     <p class="label">Osallistujien nimet</p>
                     <p class="control">
-                        @if($meeting->settings->shownames)
+                        @if($settings->shownames)
                             <button type="submit" name="target" class="button is-warning" value="hideNames">
                                 <span>Piilota osallistujien nimet</span>
                             </button>
@@ -101,7 +101,7 @@
                 <div class="field">
                     <p class="label">Sosiaalisen median painikkeet</p>
                     <p class="control">
-                        @if($meeting->settings->socialmediabuttons)
+                        @if($settings->socialmediabuttons)
                             <button type="submit" name="target" class="button is-warning" value="hideSocialmediabuttons">
                                 <span>Piilota sosiaalisen median painikkeet</span>
                             </button>

@@ -218,6 +218,7 @@ class MeetingController extends Controller
 		    $meeting = Meeting::where( 'adminslug', $adminslug )
 		                      ->with( [
 			                      'user',
+			                      'settings',
 			                      'registrations'=> function ( $query ) {
 				                      $query->orderBy( 'created_at', 'asc' );
 			                      },
@@ -228,7 +229,9 @@ class MeetingController extends Controller
 	    }catch(ModelNotFoundException $e){
 		    return response()->view("errors.404", [], 404);
 		}
-		
+
+	    $settings = Setting::where('meeting_id', $meeting->id)->firstOrFail();
+
 		if($meeting->trashed()){
 			return view('meetings.deletedAdmin', compact('meeting'));
 		}
@@ -255,7 +258,7 @@ class MeetingController extends Controller
 
 	    $admin = true;
 
-	    return view('meetings.show', compact('meeting', 'times', 'amounts', 'admin'));
+	    return view('meetings.show', compact('meeting', 'times', 'amounts', 'admin', 'settings'));
     }
 
     /**
@@ -270,7 +273,6 @@ class MeetingController extends Controller
 		    $meeting = Meeting::where( 'slug', $slug )
                       ->with( [
 	                      'user',
-	                      'settings',
 	                      'registrations'=> function ( $query ) {
 		                      $query->orderBy( 'created_at', 'asc' );
 	                      },
@@ -281,6 +283,8 @@ class MeetingController extends Controller
 	    }catch(ModelNotFoundException $e){
     		return response()->view("errors.404", [], 404);
 		}
+
+        $settings = Setting::where('meeting_id', $meeting->id)->firstOrFail();
 		
 		if($meeting->trashed()){
 			return view('meetings.deleted');
@@ -318,7 +322,7 @@ class MeetingController extends Controller
 
         $admin = false;
 
-        return view( 'meetings.show', compact( 'meeting', 'times', 'amounts', 'admin' ) );
+        return view( 'meetings.show', compact( 'meeting', 'times', 'amounts', 'admin', 'settings' ) );
 
     }
 
