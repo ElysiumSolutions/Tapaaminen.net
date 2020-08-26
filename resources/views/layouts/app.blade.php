@@ -93,7 +93,6 @@
                                 {{--<a href="{{ url('/palsta') }}" class="navbar-item">Palsta</a>--}}
                                 <a href="{{ url('/tiedotteet') }}" class="navbar-item">Tiedotteet</a>
                                 <a href="{{ url('/tietoa') }}" class="navbar-item">Tietoa</a>
-                                <a href="{{ url('/slack') }}" class="navbar-item">Slack</a>
                                 @if (Auth::guest())
                                     <a href="{{ url('/luo-tili') }}" class="navbar-item">Luo tili</a>
                                     <a href="{{ url('/kirjaudu') }}" class="navbar-item">Kirjaudu sisään</a>

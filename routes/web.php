@@ -75,14 +75,6 @@ Route::post('salasana/nollaa', 'Auth\ResetPasswordController@reset');
 Route::get('evasteet', 'PagesController@cookies');
 Route::get('rekisteriseloste', 'PagesController@registerinfo');
 Route::get('tietoa', 'PagesController@about');
-Route::get('slack', 'PagesController@slack');
+//Route::get('slack', 'PagesController@slack');
 Route::get('tiedotteet', 'PagesController@announcements');
 Route::post('tiedotteet', 'PagesController@subscribe');
-
-//legacy routes
-Route::get('/nayta/{id}', function($id){
-    return redirect('https://vanha.tapaaminen.net/nayta/'.$id);
-});
-Route::get('/hallinta/{id}', function($id){
-    return redirect('https://vanha.tapaaminen.net/hallinta/'.$id);
-});

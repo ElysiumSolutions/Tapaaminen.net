@@ -39,12 +39,14 @@
                     <div class="panel-block">Ei ilmottautumisia!</div>
                 @else
                     @foreach($registrations as $registration)
-                        <a class="panel-block" href="/s/{{ $registration->meeting->slug }}">
-                            <span class="panel-icon">
-                                <i class="fas fa-calendar"></i>
-                            </span>
-                            {{ $registration->meeting->name }}
-                        </a>
+                        @if(isset($registration->meeting->slug) && isset($registration->meeting->name))
+                            <a class="panel-block" href="/s/{{ $registration->meeting->slug }}">
+                                <span class="panel-icon">
+                                    <i class="fas fa-calendar"></i>
+                                </span>
+                                {{ $registration->meeting->name }}
+                            </a>
+                        @endif
                     @endforeach
                 @endif
             </nav>

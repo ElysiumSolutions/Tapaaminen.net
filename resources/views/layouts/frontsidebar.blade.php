@@ -6,9 +6,7 @@
         <strong>Tervetuloa Tapaaminen.net sivustolle!</strong><br />
         Sivuston tarkoituksena on tarjota käyttäjälle mahdollisuus sopia tapaamisia ilmaiseksi ja helposti.<br />
         <br />
-        Tapaamisen luonti ei vaadi rekisteröitymistä, mutta ilmainen käyttäjätili tuo lisää ominaisuuksia ja mahdollisuuden kysyä apua tai auttaa muita palstalla.<br />
-        <br />
-        Katsot juuri Tapaaminen.net sivuston uutta versiota ja siinä on käytännössä uudistettu kaikki. Mikäli haikailet vanhaan takaisin niin se löytyy osoitteesta <a href="https://vanha.tapaaminen.net">vanha.tapaaminen.net</a>.
+        Tapaamisen luonti ei vaadi rekisteröitymistä, mutta ilmainen käyttäjätili tuo lisää ominaisuuksia ja mahdollisuuden kysyä apua tai auttaa muita palstalla.
     </div>
 </article>
 <article class="message is-success">
@@ -47,10 +45,6 @@
             <p><strong>Apua?!</strong><br />
                 Kaipaatko kenties apua tapaamisen kanssa? Ei huolta, olemme panostaneet myös siihenkin tällä kertaa.</p>
             <p>
-                <ol>
-                    <li>Lähetä sähköpostia osoitteeseen apua@tapaaminen.net</li>
-                    <li>Liity meidän Slackkiin ja kysy apua #tuki kanavalla</li>
-                </ol>
                 <a href="mailto:apua@tapaaminen.net" class="button is-dark is-outlined">apua@tapaaminen.net</a>
             </p>
         </div>

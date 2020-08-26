@@ -15,11 +15,11 @@
             <p><strong>Google analytics</strong><br />
             Tällä seuraamme sivuston kävijöitä ja kävijämäärää.</p>
 
-            <p><strong>Livechat</strong><br />
-            Käyttämämme livechat käyttää myöskin evästeitä. Niitä käytetään käyttäjän toimien seuraamiseen sekä tietojen muistamiseen.</p>
-
             <p><strong>"Seuraamme sinua" evästeilmoitus</strong><br />
             Tämäkin käyttää evästeitä. Se tallentaa tiedon siitä oletko sallinnut ne, jotta se ei pompi koko ajan silmille.</p>
+
+            <p><strong>Sivuston toiminta</strong><br />
+            Jotta esim. kirjautuminen ja muut sivuston tärkeät toiminnot toimivat oikein tarvitaan niihin evästeitä. Ilman niitä ei tämäkään palvelu toimisi kunnolla.</p>
         </div>
     </div>
 
