@@ -47,7 +47,7 @@
                 Ei kommentteja!
             @endif
 
-            @foreach($meeting->comments as $comment)
+            @foreach($comments as $comment)
                 <div class="box bbs-post" id="{{ $comment->id }}">
                     <article class="media">
                         <figure class="media-left">
