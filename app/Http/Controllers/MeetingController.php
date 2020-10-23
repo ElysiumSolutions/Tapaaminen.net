@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\Registration;
 use App\Time;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -233,8 +231,6 @@ class MeetingController extends Controller
 		}
 
 	    $settings = Setting::where('meeting_id', $meeting->id)->firstOrFail();
-        $registrations = Registration::where('meeting_id', $meeting->id)->get();
-        $comments = Comment::where('meeting_id', $meeting->id)->get();
 
 		if($meeting->trashed()){
 			return view('meetings.deletedAdmin', compact('meeting'));
@@ -262,7 +258,7 @@ class MeetingController extends Controller
 
 	    $admin = true;
 
-	    return view('meetings.show', compact('meeting', 'times', 'amounts', 'admin', 'settings', 'registrations', 'comments'));
+	    return view('meetings.show', compact('meeting', 'times', 'amounts', 'admin', 'settings'));
     }
 
     /**
@@ -289,9 +285,7 @@ class MeetingController extends Controller
 		}
 
         $settings = Setting::where('meeting_id', $meeting->id)->firstOrFail();
-    	$registrations = Registration::where('meeting_id', $meeting->id)->get();
-        $comments = Comment::where('meeting_id', $meeting->id)->get();
-
+		
 		if($meeting->trashed()){
 			return view('meetings.deleted');
 		}
@@ -328,7 +322,7 @@ class MeetingController extends Controller
 
         $admin = false;
 
-        return view( 'meetings.show', compact( 'meeting', 'times', 'amounts', 'admin', 'settings', 'registrations', 'comments' ) );
+        return view( 'meetings.show', compact( 'meeting', 'times', 'amounts', 'admin', 'settings' ) );
 
     }
 

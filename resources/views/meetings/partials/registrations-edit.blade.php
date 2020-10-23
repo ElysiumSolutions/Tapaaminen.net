@@ -25,7 +25,7 @@
                 <td class="empty">&nbsp;</td>
             </tr>
             <tr>
-                <td class="empty" style="text-align: right;">{{ count($registrations) }} ilmoittautumista</td>
+                <td class="empty" style="text-align: right;">{{ count($meeting->registrations) }} ilmoittautumista</td>
                 @foreach($times as $month => $days)
                     @foreach($days as $day => $times2)
                         @foreach($times2 as $time)
@@ -39,7 +39,7 @@
             <tbody>
             <?php $timeamounts = array(); ?>
 
-            @foreach($registrations as $registration)
+            @foreach($meeting->registrations as $registration)
                 <tr class="register registration">
                     <td class="username">
                                 <span class="icon is-small is-left">
