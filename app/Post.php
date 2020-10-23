@@ -13,6 +13,7 @@ class Post extends Model
 
     // We use uuids instead
     public $incrementing = false;
+    protected $keyType = 'string';
 
     protected $touches = ['thread'];
 

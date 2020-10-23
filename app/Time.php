@@ -13,6 +13,7 @@ class Time extends Model
 
 	// We use uuids instead
 	public $incrementing = false;
+    protected $keyType = 'string';
 
 	protected $dates = [
 		'created_at',

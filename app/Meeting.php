@@ -14,6 +14,7 @@ class Meeting extends Model
 
     // We use uuids instead
     public $incrementing = false;
+    protected $keyType = 'string';
 
     public function user(){
         return $this->belongsTo('App\User');
