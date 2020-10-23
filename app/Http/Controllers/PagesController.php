@@ -97,8 +97,6 @@ class PagesController extends Controller
 			    $announcementsarray[$campaign['id']]['send_time'] = $sentDate;
 			    $announcementsarray[$campaign['id']]['url'] = $campaign['archive_url'];
 			    $announcementsarray[$campaign['id']]['emails_sent'] = $campaign['emails_sent'];
-		    	$campaigninfo = $mailchimp->get('/campaigns/'.$campaign['id'].'/content');
-		    	$announcementsarray[$campaign['id']]['html'] = $campaigninfo['html'];
 		    }
 		    return $announcementsarray;
 	    });
