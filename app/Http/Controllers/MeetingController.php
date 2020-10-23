@@ -218,6 +218,7 @@ class MeetingController extends Controller
 		    $meeting = Meeting::where( 'adminslug', $adminslug )
 		                      ->with( [
 			                      'user',
+			                      'settings',
 			                      'registrations'=> function ( $query ) {
 				                      $query->orderBy( 'created_at', 'asc' );
 			                      },
